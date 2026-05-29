@@ -144,20 +144,17 @@ function Index() {
       <section className="relative h-[100vh] min-h-[760px] w-full overflow-hidden">
         {/* Background crossfade */}
         <div className="absolute inset-0">
-          <AnimatePresence>
-            <motion.div
-              key={selected}
-              initial={{ opacity: 0, scale: 1.08 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ opacity: { duration: 1.2, ease: "easeInOut" }, scale: { duration: 10, ease: "easeOut" } }}
-              className="absolute inset-0"
-            >
-              <img src={current.image} alt={current.title} className="h-full w-full object-cover" />
-            </motion.div>
-          </AnimatePresence>
+          <video
+            src="/hero.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a1830]/70 via-[#0a0a0a]/40 to-[#0a0a0a]" />
           <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+
         </div>
 
         {/* Nav */}
