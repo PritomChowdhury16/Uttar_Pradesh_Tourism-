@@ -35,8 +35,7 @@ const experiences: Experience[] = [
     temple: "Prem Mandir",
     description:
       "A breathtaking white marble temple dedicated to Radha Krishna, illuminated by ever-changing lights that paint divine love across the night sky.",
-    image:
-      "https://images.unsplash.com/photo-1561361513-2d000a50f0dc?auto=format&fit=crop&w=1600&q=80",
+    image: premMandir,
   },
   {
     overline: "Krishna Janmabhoomi",
@@ -44,8 +43,7 @@ const experiences: Experience[] = [
     temple: "Shri Krishna Janmabhoomi",
     description:
       "The sacred birthplace of Lord Krishna — a sanctum where devotion has endured for millennia, echoing with the timeless songs of bhakti.",
-    image:
-      "https://images.unsplash.com/photo-1609858855097-1ba74f5f56cf?auto=format&fit=crop&w=1600&q=80",
+    image: krishnaJanmabhoomi,
   },
   {
     overline: "Ram Nagari",
@@ -53,8 +51,7 @@ const experiences: Experience[] = [
     temple: "Ram Mandir",
     description:
       "A magnificent shrine rising at the birthplace of Lord Ram, carved in pink sandstone and crowned with shikharas reaching toward the heavens.",
-    image:
-      "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1600&q=80",
+    image: ramMandir,
   },
   {
     overline: "Ghats of Eternity",
@@ -62,8 +59,7 @@ const experiences: Experience[] = [
     temple: "Kashi Vishwanath",
     description:
       "The golden temple of Lord Shiva on the banks of the Ganga — one of the twelve Jyotirlingas, where ancient flames have never ceased to burn.",
-    image:
-      "https://images.unsplash.com/photo-1561361398-a8d1f549c1d8?auto=format&fit=crop&w=1600&q=80",
+    image: kashiVishwanath,
   },
   {
     overline: "Ayodhya",
@@ -71,8 +67,7 @@ const experiences: Experience[] = [
     temple: "Hanuman Garhi",
     description:
       "A fortress temple atop a hill dedicated to Lord Hanuman — climbed by seventy-six steps of devotion, guarded by the eternal protector.",
-    image:
-      "https://images.unsplash.com/photo-1567879491820-c0a4b5c47bb6?auto=format&fit=crop&w=1600&q=80",
+    image: hanumanGarhi,
   },
 ];
 
