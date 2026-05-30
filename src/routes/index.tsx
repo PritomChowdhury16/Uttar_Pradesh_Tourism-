@@ -218,21 +218,40 @@ function Index() {
         </header>
 
         {/* Hero copy */}
-        <div className="relative z-10 px-6 md:px-12 mt-10 md:mt-20 max-w-3xl">
+        <div className="relative z-10 px-6 md:px-12 mt-10 md:mt-16 max-w-3xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={selected}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
-                Uttar Pradesh<br />Tourism.
-              </h1>
-              <p className="mt-5 max-w-md text-lg md:text-xl font-light text-white/85 leading-snug">
-                Discover the sacred heart of India through a lens of luxury and timeless tradition.
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/90">
+                {current.overline} · {current.title}
               </p>
+              <h1 className="mt-3 font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
+                {current.temple}.
+              </h1>
+              <p className="mt-5 max-w-xl text-base md:text-lg font-light text-white/85 leading-relaxed">
+                {current.description}
+              </p>
+
+              {/* Small details */}
+              <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+                {current.details.map((d) => (
+                  <div
+                    key={d.label}
+                    className="rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-md px-4 py-3"
+                  >
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                      {d.label}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-white leading-snug">{d.value}</p>
+                  </div>
+                ))}
+              </div>
+
               <button className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/15 transition">
                 Explore Journeys
                 <ArrowRight className="h-4 w-4" />
