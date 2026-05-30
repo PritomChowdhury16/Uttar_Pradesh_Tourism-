@@ -304,17 +304,17 @@ function Index() {
               </button>
             </div>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:gap-5 md:overflow-visible">
+          <div className="flex gap-3 overflow-x-auto pb-2 md:gap-4 md:justify-start">
             {experiences.map((exp, i) => {
               const active = i === selected;
               return (
                 <motion.button
                   key={exp.title}
                   onClick={() => setSelected(i)}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -3 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className={`group relative shrink-0 w-[62vw] sm:w-[36vw] md:w-auto aspect-[3/4] overflow-hidden rounded-2xl text-left transition-all ${
-                    active ? "ring-2 ring-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)]" : "ring-1 ring-white/10 hover:ring-white/30"
+                  className={`group relative shrink-0 w-[42vw] sm:w-44 md:w-48 aspect-[3/4] overflow-hidden rounded-xl text-left transition-all ${
+                    active ? "ring-2 ring-white shadow-[0_14px_36px_-14px_rgba(0,0,0,0.6)]" : "ring-1 ring-white/10 hover:ring-white/30"
                   }`}
                 >
                   <img
@@ -323,13 +323,14 @@ function Index() {
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-5">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/80">
+                  <div className="absolute inset-0 flex flex-col justify-end p-3">
+                    <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-white/80">
                       {exp.overline}
                     </p>
-                    <p className="mt-1 font-serif text-2xl md:text-[1.7rem] font-medium leading-tight text-white">
+                    <p className="mt-0.5 font-serif text-base md:text-lg font-medium leading-tight text-white">
                       {exp.title}
                     </p>
+
                   </div>
                 </motion.button>
               );
