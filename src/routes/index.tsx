@@ -27,6 +27,8 @@ type Experience = {
   temple: string;
   description: string;
   image: string;
+  video: string;
+  details: { label: string; value: string }[];
 };
 
 const experiences: Experience[] = [
@@ -37,6 +39,13 @@ const experiences: Experience[] = [
     description:
       "A breathtaking white marble temple dedicated to Radha Krishna, illuminated by ever-changing lights that paint divine love across the night sky.",
     image: premMandir,
+    video: "/videos/card-1.mp4",
+    details: [
+      { label: "Deity", value: "Radha Krishna" },
+      { label: "Built", value: "2001 – 2012" },
+      { label: "Timings", value: "5:30 AM – 8:30 PM" },
+      { label: "Highlight", value: "Musical Fountain Show" },
+    ],
   },
   {
     overline: "Krishna Janmabhoomi",
@@ -45,6 +54,13 @@ const experiences: Experience[] = [
     description:
       "The sacred birthplace of Lord Krishna — a sanctum where devotion has endured for millennia, echoing with the timeless songs of bhakti.",
     image: krishnaJanmabhoomi,
+    video: "/videos/card-2.mp4",
+    details: [
+      { label: "Deity", value: "Lord Krishna" },
+      { label: "Significance", value: "Birthplace of Krishna" },
+      { label: "Timings", value: "5:00 AM – 9:00 PM" },
+      { label: "Festival", value: "Janmashtami" },
+    ],
   },
   {
     overline: "Ram Nagari",
@@ -53,6 +69,13 @@ const experiences: Experience[] = [
     description:
       "A magnificent shrine rising at the birthplace of Lord Ram, carved in pink sandstone and crowned with shikharas reaching toward the heavens.",
     image: ramMandir,
+    video: "/videos/card-3.mp4",
+    details: [
+      { label: "Deity", value: "Lord Ram" },
+      { label: "Consecrated", value: "January 22, 2024" },
+      { label: "Timings", value: "6:30 AM – 9:30 PM" },
+      { label: "Architecture", value: "Nagara Style" },
+    ],
   },
   {
     overline: "Ghats of Eternity",
@@ -61,6 +84,13 @@ const experiences: Experience[] = [
     description:
       "The golden temple of Lord Shiva on the banks of the Ganga — one of the twelve Jyotirlingas, where ancient flames have never ceased to burn.",
     image: kashiVishwanath,
+    video: "/videos/card-4.mp4",
+    details: [
+      { label: "Deity", value: "Lord Shiva" },
+      { label: "Type", value: "Jyotirlinga (1 of 12)" },
+      { label: "Timings", value: "3:00 AM – 11:00 PM" },
+      { label: "Ritual", value: "Ganga Aarti at Dashashwamedh" },
+    ],
   },
   {
     overline: "Ayodhya",
@@ -69,6 +99,13 @@ const experiences: Experience[] = [
     description:
       "A fortress temple atop a hill dedicated to Lord Hanuman — climbed by seventy-six steps of devotion, guarded by the eternal protector.",
     image: hanumanGarhi,
+    video: "/videos/card-5.mp4",
+    details: [
+      { label: "Deity", value: "Lord Hanuman" },
+      { label: "Built", value: "10th Century" },
+      { label: "Steps", value: "76 sacred steps" },
+      { label: "Timings", value: "4:00 AM – 10:00 PM" },
+    ],
   },
 ];
 
