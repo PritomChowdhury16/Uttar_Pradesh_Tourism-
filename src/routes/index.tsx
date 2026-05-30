@@ -170,11 +170,18 @@ const culinary = [
 ];
 
 function Index() {
-  const [selected, setSelected] = useState(0);
-  const current = experiences[selected];
+  const [selected, setSelected] = useState<number | null>(null);
+  const current = selected !== null ? experiences[selected] : null;
+  const bgVideo = current ? current.video : "/intro.mp4";
+  const bgKey = current ? current.video : "intro";
 
-  const next = () => setSelected((s) => (s + 1) % experiences.length);
-  const prev = () => setSelected((s) => (s - 1 + experiences.length) % experiences.length);
+  const next = () =>
+    setSelected((s) => (s === null ? 0 : (s + 1) % experiences.length));
+  const prev = () =>
+    setSelected((s) =>
+      s === null ? experiences.length - 1 : (s - 1 + experiences.length) % experiences.length,
+    );
+
 
   return (
     <main className="min-h-screen w-full bg-[#0a0a0a] text-white font-sans">
@@ -184,8 +191,9 @@ function Index() {
         <div className="absolute inset-0">
           <AnimatePresence mode="sync">
             <motion.video
-              key={current.video}
-              src={current.video}
+              key={bgKey}
+              src={bgVideo}
+
               autoPlay
               loop
               muted
@@ -220,44 +228,65 @@ function Index() {
         {/* Hero copy */}
         <div className="relative z-10 px-6 md:px-12 mt-10 md:mt-16 max-w-3xl">
           <AnimatePresence mode="wait">
-            <motion.div
-              key={selected}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/90">
-                {current.overline} · {current.title}
-              </p>
-              <h1 className="mt-3 font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
-                {current.temple}.
-              </h1>
-              <p className="mt-5 max-w-xl text-base md:text-lg font-light text-white/85 leading-relaxed">
-                {current.description}
-              </p>
+            {current ? (
+              <motion.div
+                key={selected}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/90">
+                  {current.overline} · {current.title}
+                </p>
+                <h1 className="mt-3 font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
+                  {current.temple}.
+                </h1>
+                <p className="mt-5 max-w-xl text-base md:text-lg font-light text-white/85 leading-relaxed">
+                  {current.description}
+                </p>
 
-              {/* Small details */}
-              <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
-                {current.details.map((d) => (
-                  <div
-                    key={d.label}
-                    className="rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-md px-4 py-3"
-                  >
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
-                      {d.label}
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-white leading-snug">{d.value}</p>
-                  </div>
-                ))}
-              </div>
+                {/* Small details */}
+                <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+                  {current.details.map((d) => (
+                    <div
+                      key={d.label}
+                      className="rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-md px-4 py-3"
+                    >
+                      <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                        {d.label}
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-white leading-snug">{d.value}</p>
+                    </div>
+                  ))}
+                </div>
 
-              <button className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/15 transition">
-                Explore Journeys
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </motion.div>
+                <button className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/15 transition">
+                  Explore Journeys
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="intro"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/90">
+                  Sacred Heart of India
+                </p>
+                <h1 className="mt-3 font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
+                  Uttar Pradesh.
+                </h1>
+                <p className="mt-5 max-w-xl text-base md:text-lg font-light text-white/85 leading-relaxed">
+                  Discover the sacred heart of India through a lens of luxury and timeless tradition. Select a destination below to begin your journey.
+                </p>
+              </motion.div>
+            )}
           </AnimatePresence>
+
         </div>
 
         {/* Curated experiences strip */}
@@ -275,17 +304,17 @@ function Index() {
               </button>
             </div>
           </div>
-          <div className="flex gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-5 md:gap-5 md:overflow-visible">
+          <div className="flex gap-3 overflow-x-auto pb-2 md:gap-4 md:justify-start">
             {experiences.map((exp, i) => {
               const active = i === selected;
               return (
                 <motion.button
                   key={exp.title}
                   onClick={() => setSelected(i)}
-                  whileHover={{ y: -4 }}
+                  whileHover={{ y: -3 }}
                   transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                  className={`group relative shrink-0 w-[62vw] sm:w-[36vw] md:w-auto aspect-[3/4] overflow-hidden rounded-2xl text-left transition-all ${
-                    active ? "ring-2 ring-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.6)]" : "ring-1 ring-white/10 hover:ring-white/30"
+                  className={`group relative shrink-0 w-[42vw] sm:w-44 md:w-48 aspect-[3/4] overflow-hidden rounded-xl text-left transition-all ${
+                    active ? "ring-2 ring-white shadow-[0_14px_36px_-14px_rgba(0,0,0,0.6)]" : "ring-1 ring-white/10 hover:ring-white/30"
                   }`}
                 >
                   <img
@@ -294,13 +323,14 @@ function Index() {
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1500ms] group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-5">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/80">
+                  <div className="absolute inset-0 flex flex-col justify-end p-3">
+                    <p className="text-[8px] font-semibold uppercase tracking-[0.25em] text-white/80">
                       {exp.overline}
                     </p>
-                    <p className="mt-1 font-serif text-2xl md:text-[1.7rem] font-medium leading-tight text-white">
+                    <p className="mt-0.5 font-serif text-base md:text-lg font-medium leading-tight text-white">
                       {exp.title}
                     </p>
+
                   </div>
                 </motion.button>
               );
@@ -432,7 +462,14 @@ function Index() {
         </div>
       </footer>
 
-      <Chatbot context={`${current.temple} (${current.title}, Uttar Pradesh)`} />
+      <Chatbot
+        context={
+          current
+            ? `${current.temple} (${current.title}, Uttar Pradesh)`
+            : "Uttar Pradesh sacred destinations"
+        }
+      />
+
     </main>
   );
 }
