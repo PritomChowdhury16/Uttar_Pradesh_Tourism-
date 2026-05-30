@@ -180,19 +180,25 @@ function Index() {
     <main className="min-h-screen w-full bg-[#0a0a0a] text-white font-sans">
       {/* HERO */}
       <section className="relative h-[100vh] min-h-[760px] w-full overflow-hidden">
-        {/* Background crossfade */}
+        {/* Background crossfade video */}
         <div className="absolute inset-0">
-          <video
-            src="/hero.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <AnimatePresence mode="sync">
+            <motion.video
+              key={current.video}
+              src={current.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a1830]/70 via-[#0a0a0a]/40 to-[#0a0a0a]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
         </div>
 
         {/* Nav */}
