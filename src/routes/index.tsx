@@ -431,6 +431,8 @@ function Index() {
           <p>Sacred · Timeless · Luxurious</p>
         </div>
       </footer>
+
+      <Chatbot context={`${current.temple} (${current.title}, Uttar Pradesh)`} />
     </main>
   );
 }
