@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sun, Coins, Download, RefreshCw, Star, MapPin, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sun, Coins, Download, RefreshCw, Star } from "lucide-react";
 import premMandir from "@/assets/prem-mandir.png";
 import krishnaJanmabhoomi from "@/assets/krishna-janmabhoomi.png";
 import ramMandir from "@/assets/ram-mandir.png";
