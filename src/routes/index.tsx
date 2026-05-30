@@ -170,11 +170,18 @@ const culinary = [
 ];
 
 function Index() {
-  const [selected, setSelected] = useState(0);
-  const current = experiences[selected];
+  const [selected, setSelected] = useState<number | null>(null);
+  const current = selected !== null ? experiences[selected] : null;
+  const bgVideo = current ? current.video : "/intro.mp4";
+  const bgKey = current ? current.video : "intro";
 
-  const next = () => setSelected((s) => (s + 1) % experiences.length);
-  const prev = () => setSelected((s) => (s - 1 + experiences.length) % experiences.length);
+  const next = () =>
+    setSelected((s) => (s === null ? 0 : (s + 1) % experiences.length));
+  const prev = () =>
+    setSelected((s) =>
+      s === null ? experiences.length - 1 : (s - 1 + experiences.length) % experiences.length,
+    );
+
 
   return (
     <main className="min-h-screen w-full bg-[#0a0a0a] text-white font-sans">
