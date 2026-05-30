@@ -191,8 +191,9 @@ function Index() {
         <div className="absolute inset-0">
           <AnimatePresence mode="sync">
             <motion.video
-              key={current.video}
-              src={current.video}
+              key={bgKey}
+              src={bgVideo}
+
               autoPlay
               loop
               muted
