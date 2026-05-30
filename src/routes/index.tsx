@@ -461,7 +461,14 @@ function Index() {
         </div>
       </footer>
 
-      <Chatbot context={`${current.temple} (${current.title}, Uttar Pradesh)`} />
+      <Chatbot
+        context={
+          current
+            ? `${current.temple} (${current.title}, Uttar Pradesh)`
+            : "Uttar Pradesh sacred destinations"
+        }
+      />
+
     </main>
   );
 }
