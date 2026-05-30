@@ -7,6 +7,7 @@ import krishnaJanmabhoomi from "@/assets/krishna-janmabhoomi.png";
 import ramMandir from "@/assets/ram-mandir.png";
 import kashiVishwanath from "@/assets/kashi-vishwanath.png";
 import hanumanGarhi from "@/assets/hanuman-garhi.png";
+import { Chatbot } from "@/components/Chatbot";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,6 +27,8 @@ type Experience = {
   temple: string;
   description: string;
   image: string;
+  video: string;
+  details: { label: string; value: string }[];
 };
 
 const experiences: Experience[] = [
@@ -36,6 +39,13 @@ const experiences: Experience[] = [
     description:
       "A breathtaking white marble temple dedicated to Radha Krishna, illuminated by ever-changing lights that paint divine love across the night sky.",
     image: premMandir,
+    video: "/videos/card-1.mp4",
+    details: [
+      { label: "Deity", value: "Radha Krishna" },
+      { label: "Built", value: "2001 – 2012" },
+      { label: "Timings", value: "5:30 AM – 8:30 PM" },
+      { label: "Highlight", value: "Musical Fountain Show" },
+    ],
   },
   {
     overline: "Krishna Janmabhoomi",
@@ -44,6 +54,13 @@ const experiences: Experience[] = [
     description:
       "The sacred birthplace of Lord Krishna — a sanctum where devotion has endured for millennia, echoing with the timeless songs of bhakti.",
     image: krishnaJanmabhoomi,
+    video: "/videos/card-2.mp4",
+    details: [
+      { label: "Deity", value: "Lord Krishna" },
+      { label: "Significance", value: "Birthplace of Krishna" },
+      { label: "Timings", value: "5:00 AM – 9:00 PM" },
+      { label: "Festival", value: "Janmashtami" },
+    ],
   },
   {
     overline: "Ram Nagari",
@@ -52,6 +69,13 @@ const experiences: Experience[] = [
     description:
       "A magnificent shrine rising at the birthplace of Lord Ram, carved in pink sandstone and crowned with shikharas reaching toward the heavens.",
     image: ramMandir,
+    video: "/videos/card-3.mp4",
+    details: [
+      { label: "Deity", value: "Lord Ram" },
+      { label: "Consecrated", value: "January 22, 2024" },
+      { label: "Timings", value: "6:30 AM – 9:30 PM" },
+      { label: "Architecture", value: "Nagara Style" },
+    ],
   },
   {
     overline: "Ghats of Eternity",
@@ -60,6 +84,13 @@ const experiences: Experience[] = [
     description:
       "The golden temple of Lord Shiva on the banks of the Ganga — one of the twelve Jyotirlingas, where ancient flames have never ceased to burn.",
     image: kashiVishwanath,
+    video: "/videos/card-4.mp4",
+    details: [
+      { label: "Deity", value: "Lord Shiva" },
+      { label: "Type", value: "Jyotirlinga (1 of 12)" },
+      { label: "Timings", value: "3:00 AM – 11:00 PM" },
+      { label: "Ritual", value: "Ganga Aarti at Dashashwamedh" },
+    ],
   },
   {
     overline: "Ayodhya",
@@ -68,6 +99,13 @@ const experiences: Experience[] = [
     description:
       "A fortress temple atop a hill dedicated to Lord Hanuman — climbed by seventy-six steps of devotion, guarded by the eternal protector.",
     image: hanumanGarhi,
+    video: "/videos/card-5.mp4",
+    details: [
+      { label: "Deity", value: "Lord Hanuman" },
+      { label: "Built", value: "10th Century" },
+      { label: "Steps", value: "76 sacred steps" },
+      { label: "Timings", value: "4:00 AM – 10:00 PM" },
+    ],
   },
 ];
 
@@ -142,19 +180,25 @@ function Index() {
     <main className="min-h-screen w-full bg-[#0a0a0a] text-white font-sans">
       {/* HERO */}
       <section className="relative h-[100vh] min-h-[760px] w-full overflow-hidden">
-        {/* Background crossfade */}
+        {/* Background crossfade video */}
         <div className="absolute inset-0">
-          <video
-            src="/hero.mp4"
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 h-full w-full object-cover"
-          />
+          <AnimatePresence mode="sync">
+            <motion.video
+              key={current.video}
+              src={current.video}
+              autoPlay
+              loop
+              muted
+              playsInline
+              initial={{ opacity: 0, scale: 1.05 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a1830]/70 via-[#0a0a0a]/40 to-[#0a0a0a]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-
+          <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/20 to-transparent" />
         </div>
 
         {/* Nav */}
@@ -174,21 +218,40 @@ function Index() {
         </header>
 
         {/* Hero copy */}
-        <div className="relative z-10 px-6 md:px-12 mt-10 md:mt-20 max-w-3xl">
+        <div className="relative z-10 px-6 md:px-12 mt-10 md:mt-16 max-w-3xl">
           <AnimatePresence mode="wait">
             <motion.div
               key={selected}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
-                Uttar Pradesh<br />Tourism.
-              </h1>
-              <p className="mt-5 max-w-md text-lg md:text-xl font-light text-white/85 leading-snug">
-                Discover the sacred heart of India through a lens of luxury and timeless tradition.
+              <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/90">
+                {current.overline} · {current.title}
               </p>
+              <h1 className="mt-3 font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-medium leading-[1.05] text-white drop-shadow-2xl">
+                {current.temple}.
+              </h1>
+              <p className="mt-5 max-w-xl text-base md:text-lg font-light text-white/85 leading-relaxed">
+                {current.description}
+              </p>
+
+              {/* Small details */}
+              <div className="mt-7 grid grid-cols-2 md:grid-cols-4 gap-3 max-w-2xl">
+                {current.details.map((d) => (
+                  <div
+                    key={d.label}
+                    className="rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-md px-4 py-3"
+                  >
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/55">
+                      {d.label}
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-white leading-snug">{d.value}</p>
+                  </div>
+                ))}
+              </div>
+
               <button className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/15 transition">
                 Explore Journeys
                 <ArrowRight className="h-4 w-4" />
@@ -368,6 +431,8 @@ function Index() {
           <p>Sacred · Timeless · Luxurious</p>
         </div>
       </footer>
+
+      <Chatbot context={`${current.temple} (${current.title}, Uttar Pradesh)`} />
     </main>
   );
 }
