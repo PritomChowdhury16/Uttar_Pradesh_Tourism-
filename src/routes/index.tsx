@@ -23,6 +23,15 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+type Hotel = {
+  name: string;
+  tag: string;
+  rating: number;
+  price: string;
+  distance: string;
+  url: string;
+};
+
 type Experience = {
   overline: string;
   title: string;
@@ -33,6 +42,7 @@ type Experience = {
   lat: number;
   lng: number;
   details: { label: string; value: string }[];
+  hotels: Hotel[];
 };
 
 const experiences: Experience[] = [
