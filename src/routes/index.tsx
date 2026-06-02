@@ -30,6 +30,8 @@ type Experience = {
   description: string;
   image: string;
   video: string;
+  lat: number;
+  lng: number;
   details: { label: string; value: string }[];
 };
 
