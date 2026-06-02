@@ -61,6 +61,8 @@ const experiences: Experience[] = [
       "The sacred birthplace of Lord Krishna — a sanctum where devotion has endured for millennia, echoing with the timeless songs of bhakti.",
     image: krishnaJanmabhoomi,
     video: "/videos/card-2.mp4",
+    lat: 27.5046,
+    lng: 77.6738,
     details: [
       { label: "Deity", value: "Lord Krishna" },
       { label: "Significance", value: "Birthplace of Krishna" },
@@ -76,6 +78,8 @@ const experiences: Experience[] = [
       "A magnificent shrine rising at the birthplace of Lord Ram, carved in pink sandstone and crowned with shikharas reaching toward the heavens.",
     image: ramMandir,
     video: "/videos/card-3.mp4",
+    lat: 26.7956,
+    lng: 82.1943,
     details: [
       { label: "Deity", value: "Lord Ram" },
       { label: "Consecrated", value: "January 22, 2024" },
@@ -91,6 +95,8 @@ const experiences: Experience[] = [
       "The golden temple of Lord Shiva on the banks of the Ganga — one of the twelve Jyotirlingas, where ancient flames have never ceased to burn.",
     image: kashiVishwanath,
     video: "/videos/card-4.mp4",
+    lat: 25.3109,
+    lng: 83.0107,
     details: [
       { label: "Deity", value: "Lord Shiva" },
       { label: "Type", value: "Jyotirlinga (1 of 12)" },
@@ -106,6 +112,8 @@ const experiences: Experience[] = [
       "A fortress temple atop a hill dedicated to Lord Hanuman — climbed by seventy-six steps of devotion, guarded by the eternal protector.",
     image: hanumanGarhi,
     video: "/videos/card-5.mp4",
+    lat: 26.7977,
+    lng: 82.2042,
     details: [
       { label: "Deity", value: "Lord Hanuman" },
       { label: "Built", value: "10th Century" },
