@@ -1,13 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sun, Coins, Download, RefreshCw, Star } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, CloudSnow, Coins, Download, RefreshCw, Star, MapPin } from "lucide-react";
 import premMandir from "@/assets/prem-mandir.png";
 import krishnaJanmabhoomi from "@/assets/krishna-janmabhoomi.png";
 import ramMandir from "@/assets/ram-mandir.png";
 import kashiVishwanath from "@/assets/kashi-vishwanath.png";
 import hanumanGarhi from "@/assets/hanuman-garhi.png";
 import { Chatbot } from "@/components/Chatbot";
+
+const WHATSAPP_NUMBER = "912345687";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,6 +30,8 @@ type Experience = {
   description: string;
   image: string;
   video: string;
+  lat: number;
+  lng: number;
   details: { label: string; value: string }[];
 };
 
@@ -40,6 +44,8 @@ const experiences: Experience[] = [
       "A breathtaking white marble temple dedicated to Radha Krishna, illuminated by ever-changing lights that paint divine love across the night sky.",
     image: premMandir,
     video: "/videos/card-1.mp4",
+    lat: 27.5806,
+    lng: 77.7006,
     details: [
       { label: "Deity", value: "Radha Krishna" },
       { label: "Built", value: "2001 – 2012" },
@@ -55,6 +61,8 @@ const experiences: Experience[] = [
       "The sacred birthplace of Lord Krishna — a sanctum where devotion has endured for millennia, echoing with the timeless songs of bhakti.",
     image: krishnaJanmabhoomi,
     video: "/videos/card-2.mp4",
+    lat: 27.5046,
+    lng: 77.6738,
     details: [
       { label: "Deity", value: "Lord Krishna" },
       { label: "Significance", value: "Birthplace of Krishna" },
@@ -70,6 +78,8 @@ const experiences: Experience[] = [
       "A magnificent shrine rising at the birthplace of Lord Ram, carved in pink sandstone and crowned with shikharas reaching toward the heavens.",
     image: ramMandir,
     video: "/videos/card-3.mp4",
+    lat: 26.7956,
+    lng: 82.1943,
     details: [
       { label: "Deity", value: "Lord Ram" },
       { label: "Consecrated", value: "January 22, 2024" },
@@ -85,6 +95,8 @@ const experiences: Experience[] = [
       "The golden temple of Lord Shiva on the banks of the Ganga — one of the twelve Jyotirlingas, where ancient flames have never ceased to burn.",
     image: kashiVishwanath,
     video: "/videos/card-4.mp4",
+    lat: 25.3109,
+    lng: 83.0107,
     details: [
       { label: "Deity", value: "Lord Shiva" },
       { label: "Type", value: "Jyotirlinga (1 of 12)" },
@@ -100,6 +112,8 @@ const experiences: Experience[] = [
       "A fortress temple atop a hill dedicated to Lord Hanuman — climbed by seventy-six steps of devotion, guarded by the eternal protector.",
     image: hanumanGarhi,
     video: "/videos/card-5.mp4",
+    lat: 26.7977,
+    lng: 82.2042,
     details: [
       { label: "Deity", value: "Lord Hanuman" },
       { label: "Built", value: "10th Century" },
@@ -169,11 +183,94 @@ const culinary = [
   },
 ];
 
+type Weather = { temp: number; code: number; label: string } | null;
+
+const weatherLabel = (code: number): { label: string; kind: "sun" | "cloud" | "rain" | "snow" } => {
+  if (code === 0) return { label: "Clear Sky", kind: "sun" };
+  if ([1, 2].includes(code)) return { label: "Mostly Sunny", kind: "sun" };
+  if (code === 3) return { label: "Overcast", kind: "cloud" };
+  if ([45, 48].includes(code)) return { label: "Foggy", kind: "cloud" };
+  if (code >= 51 && code <= 67) return { label: "Rain Showers", kind: "rain" };
+  if (code >= 71 && code <= 77) return { label: "Snow", kind: "snow" };
+  if (code >= 80 && code <= 82) return { label: "Rain Showers", kind: "rain" };
+  if (code >= 95) return { label: "Thunderstorm", kind: "rain" };
+  return { label: "Partly Cloudy", kind: "cloud" };
+};
+
 function Index() {
   const [selected, setSelected] = useState<number | null>(null);
   const current = selected !== null ? experiences[selected] : null;
   const bgVideo = current ? current.video : "/intro.mp4";
   const bgKey = current ? current.video : "intro";
+
+  // Default to Varanasi when nothing is selected so the map/weather always have a place
+  const place = current ?? experiences[3];
+
+  const [weather, setWeather] = useState<Weather>(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setWeatherLoading(true);
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${place.lat}&longitude=${place.lng}&current=temperature_2m,weather_code&timezone=Asia%2FKolkata`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (cancelled) return;
+        const temp = Math.round(data?.current?.temperature_2m ?? 0);
+        const code = data?.current?.weather_code ?? 0;
+        setWeather({ temp, code, label: weatherLabel(code).label });
+      } catch {
+        if (!cancelled) setWeather(null);
+      } finally {
+        if (!cancelled) setWeatherLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [place.lat, place.lng]);
+
+  const WeatherIcon = weather
+    ? { sun: Sun, cloud: Cloud, rain: CloudRain, snow: CloudSnow }[weatherLabel(weather.code).kind]
+    : Sun;
+
+  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${place.lng - 0.04}%2C${
+    place.lat - 0.03
+  }%2C${place.lng + 0.04}%2C${place.lat + 0.03}&layer=mapnik&marker=${place.lat}%2C${place.lng}`;
+
+  const downloadBrochure = () => {
+    const lines = [
+      `UTTAR PRADESH TOURISM — Sacred Journeys Brochure`,
+      `Generated: ${new Date().toLocaleString("en-IN")}`,
+      ``,
+      `Featured: ${place.temple} (${place.title})`,
+      `Coordinates: ${place.lat}, ${place.lng}`,
+      ``,
+      place.description,
+      ``,
+      `— Highlights —`,
+      ...place.details.map((d) => `• ${d.label}: ${d.value}`),
+      ``,
+      `— All Sacred Destinations —`,
+      ...experiences.map(
+        (e, i) => `${i + 1}. ${e.temple} — ${e.title} (${e.lat.toFixed(3)}, ${e.lng.toFixed(3)})`,
+      ),
+      ``,
+      `Plan with us · WhatsApp +${WHATSAPP_NUMBER}`,
+    ];
+    const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `up-tourism-${place.title.toLowerCase().replace(/\s+/g, "-")}-brochure.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const next = () =>
     setSelected((s) => (s === null ? 0 : (s + 1) % experiences.length));
@@ -419,6 +516,39 @@ function Index() {
               </div>
             </div>
 
+            {/* Map */}
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+              <div className="flex items-center justify-between px-5 pt-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
+                  Location on Map
+                </p>
+                <span className="inline-flex items-center gap-1 text-[10px] text-amber-200/85">
+                  <MapPin className="h-3 w-3" />
+                  {place.title}, U.P.
+                </span>
+              </div>
+              <div className="mt-3 relative aspect-[4/3] w-full">
+                <iframe
+                  key={`${place.lat},${place.lng}`}
+                  title={`Map of ${place.temple}`}
+                  src={mapSrc}
+                  className="absolute inset-0 h-full w-full border-0 grayscale-[20%] contrast-110"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex items-center justify-between px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-white/55">
+                <span>{place.temple}</span>
+                <a
+                  href={`https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=14/${place.lat}/${place.lng}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white/75 hover:text-white"
+                >
+                  Open ↗
+                </a>
+              </div>
+            </div>
+
             {/* Plan your journey */}
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
@@ -427,13 +557,23 @@ function Index() {
               <div className="mt-4 space-y-3">
                 <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="flex items-center gap-3">
-                    <Sun className="h-5 w-5 text-amber-300" />
+                    <WeatherIcon className="h-5 w-5 text-amber-300" />
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Current Weather</p>
-                      <p className="text-sm text-white">28°C · Varanasi</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                        Live Weather · {place.title}
+                      </p>
+                      <p className="text-sm text-white">
+                        {weatherLoading
+                          ? "Loading…"
+                          : weather
+                            ? `${weather.temp}°C · ${weather.label}`
+                            : "Unavailable"}
+                      </p>
                     </div>
                   </div>
-                  <p className="text-[10px] text-white/60">Partly Cloudy</p>
+                  <p className="text-[10px] text-white/60">
+                    {new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="flex items-center gap-3">
@@ -445,7 +585,10 @@ function Index() {
                   </div>
                   <RefreshCw className="h-4 w-4 text-white/40" />
                 </div>
-                <button className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/10 transition">
+                <button
+                  onClick={downloadBrochure}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/10 transition"
+                >
                   <Download className="h-4 w-4" />
                   Download Brochure
                 </button>
@@ -469,6 +612,22 @@ function Index() {
             : "Uttar Pradesh sacred destinations"
         }
       />
+
+      {/* Floating WhatsApp */}
+      <a
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+          `Namaste! I'd like to plan a journey to ${place.temple} (${place.title}, Uttar Pradesh).`,
+        )}`}
+        target="_blank"
+        rel="noreferrer"
+        aria-label={`Chat on WhatsApp +${WHATSAPP_NUMBER}`}
+        className="fixed bottom-6 left-6 z-50 flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(37,211,102,0.7)] ring-1 ring-white/20 hover:bg-[#1ebe5d] transition"
+      >
+        <svg viewBox="0 0 32 32" className="h-5 w-5 fill-current" aria-hidden="true">
+          <path d="M19.11 17.21c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.33-.79-.71-1.33-1.58-1.49-1.85-.16-.27-.02-.41.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.01-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.95.93-.95 2.27 0 1.34.97 2.63 1.11 2.81.14.18 1.91 2.91 4.62 4.08.65.28 1.15.45 1.55.58.65.21 1.24.18 1.71.11.52-.08 1.6-.65 1.83-1.29.23-.64.23-1.18.16-1.29-.07-.11-.25-.18-.52-.32zM16.02 6C10.5 6 6.02 10.48 6.02 16c0 1.77.46 3.5 1.34 5.02L6 26l5.13-1.34A9.96 9.96 0 0 0 16.02 26C21.55 26 26.02 21.52 26.02 16S21.55 6 16.02 6z"/>
+        </svg>
+        <span className="hidden sm:inline">+{WHATSAPP_NUMBER}</span>
+      </a>
 
     </main>
   );
