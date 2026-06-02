@@ -183,11 +183,94 @@ const culinary = [
   },
 ];
 
+type Weather = { temp: number; code: number; label: string } | null;
+
+const weatherLabel = (code: number): { label: string; kind: "sun" | "cloud" | "rain" | "snow" } => {
+  if (code === 0) return { label: "Clear Sky", kind: "sun" };
+  if ([1, 2].includes(code)) return { label: "Mostly Sunny", kind: "sun" };
+  if (code === 3) return { label: "Overcast", kind: "cloud" };
+  if ([45, 48].includes(code)) return { label: "Foggy", kind: "cloud" };
+  if (code >= 51 && code <= 67) return { label: "Rain Showers", kind: "rain" };
+  if (code >= 71 && code <= 77) return { label: "Snow", kind: "snow" };
+  if (code >= 80 && code <= 82) return { label: "Rain Showers", kind: "rain" };
+  if (code >= 95) return { label: "Thunderstorm", kind: "rain" };
+  return { label: "Partly Cloudy", kind: "cloud" };
+};
+
 function Index() {
   const [selected, setSelected] = useState<number | null>(null);
   const current = selected !== null ? experiences[selected] : null;
   const bgVideo = current ? current.video : "/intro.mp4";
   const bgKey = current ? current.video : "intro";
+
+  // Default to Varanasi when nothing is selected so the map/weather always have a place
+  const place = current ?? experiences[3];
+
+  const [weather, setWeather] = useState<Weather>(null);
+  const [weatherLoading, setWeatherLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      setWeatherLoading(true);
+      try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${place.lat}&longitude=${place.lng}&current=temperature_2m,weather_code&timezone=Asia%2FKolkata`;
+        const res = await fetch(url);
+        const data = await res.json();
+        if (cancelled) return;
+        const temp = Math.round(data?.current?.temperature_2m ?? 0);
+        const code = data?.current?.weather_code ?? 0;
+        setWeather({ temp, code, label: weatherLabel(code).label });
+      } catch {
+        if (!cancelled) setWeather(null);
+      } finally {
+        if (!cancelled) setWeatherLoading(false);
+      }
+    };
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [place.lat, place.lng]);
+
+  const WeatherIcon = weather
+    ? { sun: Sun, cloud: Cloud, rain: CloudRain, snow: CloudSnow }[weatherLabel(weather.code).kind]
+    : Sun;
+
+  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${place.lng - 0.04}%2C${
+    place.lat - 0.03
+  }%2C${place.lng + 0.04}%2C${place.lat + 0.03}&layer=mapnik&marker=${place.lat}%2C${place.lng}`;
+
+  const downloadBrochure = () => {
+    const lines = [
+      `UTTAR PRADESH TOURISM — Sacred Journeys Brochure`,
+      `Generated: ${new Date().toLocaleString("en-IN")}`,
+      ``,
+      `Featured: ${place.temple} (${place.title})`,
+      `Coordinates: ${place.lat}, ${place.lng}`,
+      ``,
+      place.description,
+      ``,
+      `— Highlights —`,
+      ...place.details.map((d) => `• ${d.label}: ${d.value}`),
+      ``,
+      `— All Sacred Destinations —`,
+      ...experiences.map(
+        (e, i) => `${i + 1}. ${e.temple} — ${e.title} (${e.lat.toFixed(3)}, ${e.lng.toFixed(3)})`,
+      ),
+      ``,
+      `Plan with us · WhatsApp +${WHATSAPP_NUMBER}`,
+    ];
+    const blob = new Blob([lines.join("\n")], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `up-tourism-${place.title.toLowerCase().replace(/\s+/g, "-")}-brochure.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   const next = () =>
     setSelected((s) => (s === null ? 0 : (s + 1) % experiences.length));
