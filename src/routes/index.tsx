@@ -158,44 +158,11 @@ const experiences: Experience[] = [
   },
 ];
 
-const stays = [
-  {
-    tag: "Premier Selection",
-    name: "Brijrama Palace",
-    rating: 5,
-    price: "₹18,500",
-    location: "Darbhanga Ghat, Varanasi",
-    airport: "LBS International",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Heritage Stay",
-    name: "Lebua Lucknow",
-    rating: 4,
-    price: "₹6,500",
-    location: "Mall Avenue, Lucknow",
-    airport: "CCS Airport",
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Boutique",
-    name: "The Clarks International",
-    rating: 4,
-    price: "₹4,500",
-    location: "Ayodhya Cantonment",
-    airport: "Ayodhya Airport",
-    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Modern Luxury",
-    name: "Nidhivan Sarovar Portico",
-    rating: 4,
-    price: "₹5,200",
-    location: "Vrindavan Road",
-    airport: "Agra Airport",
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
-  },
-];
+// UP-wide bounding box (covers all 5 sacred destinations from Mathura → Varanasi)
+const UP_BBOX = { minLng: 77.0, minLat: 24.9, maxLng: 83.7, maxLat: 28.1 };
+const UP_MAP_SRC = `https://www.openstreetmap.org/export/embed.html?bbox=${UP_BBOX.minLng}%2C${UP_BBOX.minLat}%2C${UP_BBOX.maxLng}%2C${UP_BBOX.maxLat}&layer=mapnik`;
+
+
 
 const culinary = [
   {
