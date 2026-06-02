@@ -516,6 +516,39 @@ function Index() {
               </div>
             </div>
 
+            {/* Map */}
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+              <div className="flex items-center justify-between px-5 pt-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
+                  Location on Map
+                </p>
+                <span className="inline-flex items-center gap-1 text-[10px] text-amber-200/85">
+                  <MapPin className="h-3 w-3" />
+                  {place.title}, U.P.
+                </span>
+              </div>
+              <div className="mt-3 relative aspect-[4/3] w-full">
+                <iframe
+                  key={`${place.lat},${place.lng}`}
+                  title={`Map of ${place.temple}`}
+                  src={mapSrc}
+                  className="absolute inset-0 h-full w-full border-0 grayscale-[20%] contrast-110"
+                  loading="lazy"
+                />
+              </div>
+              <div className="flex items-center justify-between px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-white/55">
+                <span>{place.temple}</span>
+                <a
+                  href={`https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=14/${place.lat}/${place.lng}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-white/75 hover:text-white"
+                >
+                  Open ↗
+                </a>
+              </div>
+            </div>
+
             {/* Plan your journey */}
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
@@ -524,13 +557,23 @@ function Index() {
               <div className="mt-4 space-y-3">
                 <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="flex items-center gap-3">
-                    <Sun className="h-5 w-5 text-amber-300" />
+                    <WeatherIcon className="h-5 w-5 text-amber-300" />
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Current Weather</p>
-                      <p className="text-sm text-white">28°C · Varanasi</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                        Live Weather · {place.title}
+                      </p>
+                      <p className="text-sm text-white">
+                        {weatherLoading
+                          ? "Loading…"
+                          : weather
+                            ? `${weather.temp}°C · ${weather.label}`
+                            : "Unavailable"}
+                      </p>
                     </div>
                   </div>
-                  <p className="text-[10px] text-white/60">Partly Cloudy</p>
+                  <p className="text-[10px] text-white/60">
+                    {new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })}
+                  </p>
                 </div>
                 <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
                   <div className="flex items-center gap-3">
@@ -542,7 +585,10 @@ function Index() {
                   </div>
                   <RefreshCw className="h-4 w-4 text-white/40" />
                 </div>
-                <button className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/10 transition">
+                <button
+                  onClick={downloadBrochure}
+                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/10 transition"
+                >
                   <Download className="h-4 w-4" />
                   Download Brochure
                 </button>
