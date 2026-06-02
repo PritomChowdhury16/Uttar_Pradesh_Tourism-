@@ -44,6 +44,8 @@ const experiences: Experience[] = [
       "A breathtaking white marble temple dedicated to Radha Krishna, illuminated by ever-changing lights that paint divine love across the night sky.",
     image: premMandir,
     video: "/videos/card-1.mp4",
+    lat: 27.5806,
+    lng: 77.7006,
     details: [
       { label: "Deity", value: "Radha Krishna" },
       { label: "Built", value: "2001 – 2012" },
