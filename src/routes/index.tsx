@@ -23,6 +23,15 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
+type Hotel = {
+  name: string;
+  tag: string;
+  rating: number;
+  price: string;
+  distance: string;
+  url: string;
+};
+
 type Experience = {
   overline: string;
   title: string;
@@ -33,6 +42,7 @@ type Experience = {
   lat: number;
   lng: number;
   details: { label: string; value: string }[];
+  hotels: Hotel[];
 };
 
 const experiences: Experience[] = [
@@ -52,6 +62,11 @@ const experiences: Experience[] = [
       { label: "Timings", value: "5:30 AM – 8:30 PM" },
       { label: "Highlight", value: "Musical Fountain Show" },
     ],
+    hotels: [
+      { name: "Nidhivan Sarovar Portico", tag: "Modern Luxury", rating: 4, price: "₹5,200", distance: "1.2 km from Prem Mandir", url: "https://www.sarovarhotels.com/nidhivan-sarovar-portico-vrindavan/" },
+      { name: "Kesarvaa, Vrindavan", tag: "Heritage", rating: 4, price: "₹4,800", distance: "2.0 km from temple", url: "https://www.kesarvaa.com/" },
+      { name: "ANANTA Vrindavan", tag: "Resort", rating: 4, price: "₹6,100", distance: "3.4 km from temple", url: "https://www.anantahotels.com/ananta-vrindavan/" },
+    ],
   },
   {
     overline: "Krishna Janmabhoomi",
@@ -68,6 +83,11 @@ const experiences: Experience[] = [
       { label: "Significance", value: "Birthplace of Krishna" },
       { label: "Timings", value: "5:00 AM – 9:00 PM" },
       { label: "Festival", value: "Janmashtami" },
+    ],
+    hotels: [
+      { name: "Radisson Blu Mathura", tag: "Premier", rating: 5, price: "₹8,400", distance: "2.8 km from Janmabhoomi", url: "https://www.radissonhotels.com/en-us/hotels/radisson-blu-mathura" },
+      { name: "Brijwasi Royal", tag: "Heritage", rating: 4, price: "₹3,900", distance: "0.9 km from Janmabhoomi", url: "https://www.brijwasiroyal.com/" },
+      { name: "Best Western Skycity", tag: "Boutique", rating: 4, price: "₹4,500", distance: "3.5 km from temple", url: "https://www.bestwestern.com/" },
     ],
   },
   {
@@ -86,6 +106,11 @@ const experiences: Experience[] = [
       { label: "Timings", value: "6:30 AM – 9:30 PM" },
       { label: "Architecture", value: "Nagara Style" },
     ],
+    hotels: [
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.5 km from Ram Mandir", url: "https://www.theramayanahotel.com/" },
+      { name: "The Clarks International", tag: "Boutique", rating: 4, price: "₹4,500", distance: "Ayodhya Cantt", url: "https://www.theclarkshotels.com/" },
+      { name: "Park Inn by Radisson Ayodhya", tag: "Modern", rating: 4, price: "₹6,800", distance: "2.4 km from Ram Mandir", url: "https://www.radissonhotels.com/en-us/brand/park-inn" },
+    ],
   },
   {
     overline: "Ghats of Eternity",
@@ -102,6 +127,11 @@ const experiences: Experience[] = [
       { label: "Type", value: "Jyotirlinga (1 of 12)" },
       { label: "Timings", value: "3:00 AM – 11:00 PM" },
       { label: "Ritual", value: "Ganga Aarti at Dashashwamedh" },
+    ],
+    hotels: [
+      { name: "BrijRama Palace", tag: "Premier Heritage", rating: 5, price: "₹18,500", distance: "Darbhanga Ghat", url: "https://www.brijhotels.com/brijrama-palace-varanasi" },
+      { name: "Taj Ganges Varanasi", tag: "Luxury", rating: 5, price: "₹12,400", distance: "Nadesar Palace Grounds", url: "https://www.tajhotels.com/en-in/hotels/taj-ganges-varanasi/" },
+      { name: "Guleria Kothi at the Ghats", tag: "Boutique", rating: 4, price: "₹7,800", distance: "Shivala Ghat", url: "https://www.guleriakothi.com/" },
     ],
   },
   {
@@ -120,47 +150,19 @@ const experiences: Experience[] = [
       { label: "Steps", value: "76 sacred steps" },
       { label: "Timings", value: "4:00 AM – 10:00 PM" },
     ],
+    hotels: [
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.8 km from Hanuman Garhi", url: "https://www.theramayanahotel.com/" },
+      { name: "Taraji Resorts Ayodhya", tag: "Resort", rating: 4, price: "₹5,400", distance: "3.2 km from temple", url: "https://www.tarajiresorts.com/" },
+      { name: "Hotel Shane Avadh", tag: "Comfort", rating: 3, price: "₹2,800", distance: "1.0 km from temple", url: "https://www.hotelshaneavadh.com/" },
+    ],
   },
 ];
 
-const stays = [
-  {
-    tag: "Premier Selection",
-    name: "Brijrama Palace",
-    rating: 5,
-    price: "₹18,500",
-    location: "Darbhanga Ghat, Varanasi",
-    airport: "LBS International",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Heritage Stay",
-    name: "Lebua Lucknow",
-    rating: 4,
-    price: "₹6,500",
-    location: "Mall Avenue, Lucknow",
-    airport: "CCS Airport",
-    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Boutique",
-    name: "The Clarks International",
-    rating: 4,
-    price: "₹4,500",
-    location: "Ayodhya Cantonment",
-    airport: "Ayodhya Airport",
-    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80",
-  },
-  {
-    tag: "Modern Luxury",
-    name: "Nidhivan Sarovar Portico",
-    rating: 4,
-    price: "₹5,200",
-    location: "Vrindavan Road",
-    airport: "Agra Airport",
-    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
-  },
-];
+// UP-wide bounding box (covers all 5 sacred destinations from Mathura → Varanasi)
+const UP_BBOX = { minLng: 77.0, minLat: 24.9, maxLng: 83.7, maxLat: 28.1 };
+const UP_MAP_SRC = `https://www.openstreetmap.org/export/embed.html?bbox=${UP_BBOX.minLng}%2C${UP_BBOX.minLat}%2C${UP_BBOX.maxLng}%2C${UP_BBOX.maxLat}&layer=mapnik`;
+
+
 
 const culinary = [
   {
@@ -436,60 +438,166 @@ function Index() {
         </div>
       </section>
 
-      {/* LUXURY STAYS & LOCAL FLAVORS */}
-      <section id="stays" className="relative px-6 py-16 md:px-12 md:py-24">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80">
-          Luxury Stays &amp; Local Flavors
-        </p>
+      {/* SACRED MAP OF UTTAR PRADESH */}
+      <section id="map" className="relative px-6 py-16 md:px-12 md:py-20 border-t border-white/5">
+        <div className="flex items-end justify-between flex-wrap gap-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/80">
+              Sacred Map
+            </p>
+            <h2 className="mt-2 font-serif text-3xl md:text-5xl font-medium text-white">
+              Across Uttar Pradesh
+            </h2>
+            <p className="mt-2 max-w-xl text-sm text-white/65">
+              Five timeless destinations — from the marble courts of Vrindavan to the eternal ghats of Varanasi.
+            </p>
+          </div>
+          <a
+            href={`https://www.openstreetmap.org/#map=7/26.85/80.95`}
+            target="_blank"
+            rel="noreferrer"
+            className="text-[10px] uppercase tracking-[0.25em] text-white/70 hover:text-white"
+          >
+            Open Full Map ↗
+          </a>
+        </div>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-5">
+          {/* UP overview map with all 5 pins */}
+          <div className="lg:col-span-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+            <div className="relative aspect-[4/3] w-full">
+              <iframe
+                title="Map of sacred destinations across Uttar Pradesh"
+                src={UP_MAP_SRC}
+                className="absolute inset-0 h-full w-full border-0 grayscale-[15%]"
+                loading="lazy"
+              />
+              {/* Overlay pins positioned by lat/lng inside the bbox */}
+              <div className="pointer-events-none absolute inset-0">
+                {experiences.map((e, i) => {
+                  const left = ((e.lng - UP_BBOX.minLng) / (UP_BBOX.maxLng - UP_BBOX.minLng)) * 100;
+                  const top = ((UP_BBOX.maxLat - e.lat) / (UP_BBOX.maxLat - UP_BBOX.minLat)) * 100;
+                  const active = selected === i;
+                  return (
+                    <button
+                      key={e.title}
+                      onClick={() => setSelected(i)}
+                      style={{ left: `${left}%`, top: `${top}%` }}
+                      className="pointer-events-auto absolute -translate-x-1/2 -translate-y-full group"
+                      aria-label={`${e.temple}, ${e.title}`}
+                    >
+                      <div className={`flex flex-col items-center ${active ? "scale-110" : ""} transition`}>
+                        <div className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] backdrop-blur-md shadow-lg ${
+                          active ? "bg-amber-300 text-black" : "bg-black/75 text-white border border-white/20"
+                        }`}>
+                          {e.title}
+                        </div>
+                        <MapPin className={`mt-0.5 h-5 w-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] ${active ? "text-amber-300" : "text-white"}`} />
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="flex items-center justify-between px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-white/55">
+              <span>5 sacred destinations · Uttar Pradesh, India</span>
+              <span className="text-amber-200/80">Tap a pin to explore</span>
+            </div>
+          </div>
+
+          {/* Destination list */}
+          <ul className="lg:col-span-2 grid gap-2 content-start">
+            {experiences.map((e, i) => {
+              const active = selected === i;
+              return (
+                <li key={e.title}>
+                  <button
+                    onClick={() => setSelected(i)}
+                    className={`w-full flex items-center justify-between gap-4 rounded-xl border px-4 py-3 text-left transition ${
+                      active
+                        ? "border-amber-300/60 bg-amber-300/10"
+                        : "border-white/10 bg-white/[0.03] hover:bg-white/[0.06]"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className={`flex h-8 w-8 items-center justify-center rounded-full text-xs font-semibold ${active ? "bg-amber-300 text-black" : "bg-white/10 text-white"}`}>
+                        {i + 1}
+                      </span>
+                      <div>
+                        <p className="font-serif text-base text-white leading-tight">{e.title}</p>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/55">{e.temple}</p>
+                      </div>
+                    </div>
+                    <span className="text-[10px] text-white/45">
+                      {e.lat.toFixed(2)}°N, {e.lng.toFixed(2)}°E
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </section>
+
+      {/* HOTELS FOR SELECTED DESTINATION */}
+      <section id="stays" className="relative px-6 py-16 md:px-12 md:py-20 border-t border-white/5">
+        <div className="flex items-end justify-between flex-wrap gap-4">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/80">
+              Where to Stay
+            </p>
+            <h2 className="mt-2 font-serif text-3xl md:text-5xl font-medium text-white">
+              Hotels near {place.temple}
+            </h2>
+            <p className="mt-2 text-sm text-white/65">
+              Hand-picked stays in {place.title} — book directly with the hotel.
+            </p>
+          </div>
+        </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {/* Stays grid */}
-          <div className="grid gap-6 sm:grid-cols-2 lg:col-span-2">
-            {stays.map((s) => (
-              <div
-                key={s.name}
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition hover:border-white/20 hover:bg-white/[0.05]"
+          {/* Hotels grid */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2 content-start">
+            {place.hotels.map((h) => (
+              <a
+                key={h.name + h.url}
+                href={h.url}
+                target="_blank"
+                rel="noreferrer"
+                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-amber-300/40 hover:bg-white/[0.06]"
               >
-                <div className="relative overflow-hidden rounded-xl">
-                  <img
-                    src={s.image}
-                    alt={s.name}
-                    className="h-48 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <span className="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white backdrop-blur">
-                    {s.tag}
+                <div className="flex items-start justify-between gap-3">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/80">
+                    {h.tag}
                   </span>
+                  <ArrowRight className="h-4 w-4 text-white/40 transition group-hover:translate-x-0.5 group-hover:text-amber-300" />
                 </div>
-                <div className="mt-4 flex items-start justify-between gap-4">
-                  <div>
-                    <p className="font-serif text-xl font-medium text-white">{s.name}</p>
-                    <div className="mt-1 flex gap-0.5">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-3 w-3 ${i < s.rating ? "fill-amber-400 text-amber-400" : "text-white/20"}`}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Starting from</p>
-                    <p className="mt-0.5 font-serif text-lg text-white">{s.price}<span className="text-xs text-white/60">/night</span></p>
-                  </div>
+                <p className="mt-4 font-serif text-xl font-medium text-white">{h.name}</p>
+                <div className="mt-1.5 flex gap-0.5">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <Star
+                      key={i}
+                      className={`h-3 w-3 ${i < h.rating ? "fill-amber-400 text-amber-400" : "text-white/15"}`}
+                    />
+                  ))}
                 </div>
-                <div className="mt-4 border-t border-white/10 pt-3 grid grid-cols-2 gap-3">
+                <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
                   <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Location</p>
-                    <p className="mt-1 text-sm text-white/85">{s.location}</p>
+                    <p className="mt-0.5 text-xs text-white/85">{h.distance}</p>
                   </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Nearby Airport</p>
-                    <p className="mt-1 text-sm text-white/85">{s.airport}</p>
+                  <div className="text-right">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">From</p>
+                    <p className="mt-0.5 font-serif text-base text-white">{h.price}<span className="text-[10px] text-white/55">/nt</span></p>
                   </div>
                 </div>
-              </div>
+                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-amber-200/80 truncate">
+                  Visit website ↗
+                </p>
+              </a>
             ))}
           </div>
+
 
           {/* Sidebar */}
           <aside className="space-y-6">
