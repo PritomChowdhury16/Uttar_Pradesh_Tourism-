@@ -62,6 +62,11 @@ const experiences: Experience[] = [
       { label: "Timings", value: "5:30 AM – 8:30 PM" },
       { label: "Highlight", value: "Musical Fountain Show" },
     ],
+    hotels: [
+      { name: "Nidhivan Sarovar Portico", tag: "Modern Luxury", rating: 4, price: "₹5,200", distance: "1.2 km from Prem Mandir", url: "https://www.sarovarhotels.com/nidhivan-sarovar-portico-vrindavan/" },
+      { name: "Kesarvaa, Vrindavan", tag: "Heritage", rating: 4, price: "₹4,800", distance: "2.0 km from temple", url: "https://www.kesarvaa.com/" },
+      { name: "ANANTA Vrindavan", tag: "Resort", rating: 4, price: "₹6,100", distance: "3.4 km from temple", url: "https://www.anantahotels.com/ananta-vrindavan/" },
+    ],
   },
   {
     overline: "Krishna Janmabhoomi",
@@ -78,6 +83,11 @@ const experiences: Experience[] = [
       { label: "Significance", value: "Birthplace of Krishna" },
       { label: "Timings", value: "5:00 AM – 9:00 PM" },
       { label: "Festival", value: "Janmashtami" },
+    ],
+    hotels: [
+      { name: "Radisson Blu Mathura", tag: "Premier", rating: 5, price: "₹8,400", distance: "2.8 km from Janmabhoomi", url: "https://www.radissonhotels.com/en-us/hotels/radisson-blu-mathura" },
+      { name: "Brijwasi Royal", tag: "Heritage", rating: 4, price: "₹3,900", distance: "0.9 km from Janmabhoomi", url: "https://www.brijwasiroyal.com/" },
+      { name: "Best Western Skycity", tag: "Boutique", rating: 4, price: "₹4,500", distance: "3.5 km from temple", url: "https://www.bestwestern.com/" },
     ],
   },
   {
@@ -96,6 +106,11 @@ const experiences: Experience[] = [
       { label: "Timings", value: "6:30 AM – 9:30 PM" },
       { label: "Architecture", value: "Nagara Style" },
     ],
+    hotels: [
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.5 km from Ram Mandir", url: "https://www.theramayanahotel.com/" },
+      { name: "The Clarks International", tag: "Boutique", rating: 4, price: "₹4,500", distance: "Ayodhya Cantt", url: "https://www.theclarkshotels.com/" },
+      { name: "Park Inn by Radisson Ayodhya", tag: "Modern", rating: 4, price: "₹6,800", distance: "2.4 km from Ram Mandir", url: "https://www.radissonhotels.com/en-us/brand/park-inn" },
+    ],
   },
   {
     overline: "Ghats of Eternity",
@@ -113,6 +128,11 @@ const experiences: Experience[] = [
       { label: "Timings", value: "3:00 AM – 11:00 PM" },
       { label: "Ritual", value: "Ganga Aarti at Dashashwamedh" },
     ],
+    hotels: [
+      { name: "BrijRama Palace", tag: "Premier Heritage", rating: 5, price: "₹18,500", distance: "Darbhanga Ghat", url: "https://www.brijhotels.com/brijrama-palace-varanasi" },
+      { name: "Taj Ganges Varanasi", tag: "Luxury", rating: 5, price: "₹12,400", distance: "Nadesar Palace Grounds", url: "https://www.tajhotels.com/en-in/hotels/taj-ganges-varanasi/" },
+      { name: "Guleria Kothi at the Ghats", tag: "Boutique", rating: 4, price: "₹7,800", distance: "Shivala Ghat", url: "https://www.guleriakothi.com/" },
+    ],
   },
   {
     overline: "Ayodhya",
@@ -129,6 +149,11 @@ const experiences: Experience[] = [
       { label: "Built", value: "10th Century" },
       { label: "Steps", value: "76 sacred steps" },
       { label: "Timings", value: "4:00 AM – 10:00 PM" },
+    ],
+    hotels: [
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.8 km from Hanuman Garhi", url: "https://www.theramayanahotel.com/" },
+      { name: "Taraji Resorts Ayodhya", tag: "Resort", rating: 4, price: "₹5,400", distance: "3.2 km from temple", url: "https://www.tarajiresorts.com/" },
+      { name: "Hotel Shane Avadh", tag: "Comfort", rating: 3, price: "₹2,800", distance: "1.0 km from temple", url: "https://www.hotelshaneavadh.com/" },
     ],
   },
 ];
