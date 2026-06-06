@@ -152,9 +152,9 @@ const experiences: Experience[] = [
       { label: "Timings", value: "4:00 AM – 10:00 PM" },
     ],
     hotels: [
-      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.8 km from Hanuman Garhi", url: "https://www.theramayanahotel.com/" },
-      { name: "Taraji Resorts Ayodhya", tag: "Resort", rating: 4, price: "₹5,400", distance: "3.2 km from temple", url: "https://www.tarajiresorts.com/" },
-      { name: "Hotel Shane Avadh", tag: "Comfort", rating: 3, price: "₹2,800", distance: "1.0 km from temple", url: "https://www.hotelshaneavadh.com/" },
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.8 km from Hanuman Garhi", url: "https://www.theramayanahotel.com/", image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80" },
+      { name: "Taraji Resorts Ayodhya", tag: "Resort", rating: 4, price: "₹5,400", distance: "3.2 km from temple", url: "https://www.tarajiresorts.com/", image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=900&q=80" },
+      { name: "Hotel Shane Avadh", tag: "Comfort", rating: 3, price: "₹2,800", distance: "1.0 km from temple", url: "https://www.hotelshaneavadh.com/", image: "https://images.unsplash.com/photo-1559599189-fe84dea4eb79?auto=format&fit=crop&w=900&q=80" },
     ],
   },
 ];
