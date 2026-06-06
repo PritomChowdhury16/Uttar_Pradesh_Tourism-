@@ -64,9 +64,9 @@ const experiences: Experience[] = [
       { label: "Highlight", value: "Musical Fountain Show" },
     ],
     hotels: [
-      { name: "Nidhivan Sarovar Portico", tag: "Modern Luxury", rating: 4, price: "₹5,200", distance: "1.2 km from Prem Mandir", url: "https://www.sarovarhotels.com/nidhivan-sarovar-portico-vrindavan/" },
-      { name: "Kesarvaa, Vrindavan", tag: "Heritage", rating: 4, price: "₹4,800", distance: "2.0 km from temple", url: "https://www.kesarvaa.com/" },
-      { name: "ANANTA Vrindavan", tag: "Resort", rating: 4, price: "₹6,100", distance: "3.4 km from temple", url: "https://www.anantahotels.com/ananta-vrindavan/" },
+      { name: "Nidhivan Sarovar Portico", tag: "Modern Luxury", rating: 4, price: "₹5,200", distance: "1.2 km from Prem Mandir", url: "https://www.sarovarhotels.com/nidhivan-sarovar-portico-vrindavan/", image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80" },
+      { name: "Kesarvaa, Vrindavan", tag: "Heritage", rating: 4, price: "₹4,800", distance: "2.0 km from temple", url: "https://www.kesarvaa.com/", image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80" },
+      { name: "ANANTA Vrindavan", tag: "Resort", rating: 4, price: "₹6,100", distance: "3.4 km from temple", url: "https://www.anantahotels.com/ananta-vrindavan/", image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=900&q=80" },
     ],
   },
   {
