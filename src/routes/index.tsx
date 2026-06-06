@@ -704,38 +704,6 @@ function Index() {
             </div>
 
 
-            {/* Map */}
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-              <div className="flex items-center justify-between px-5 pt-5">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
-                  Location on Map
-                </p>
-                <span className="inline-flex items-center gap-1 text-[10px] text-amber-200/85">
-                  <MapPin className="h-3 w-3" />
-                  {place.title}, U.P.
-                </span>
-              </div>
-              <div className="mt-3 relative aspect-[4/3] w-full">
-                <iframe
-                  key={`${place.lat},${place.lng}`}
-                  title={`Map of ${place.temple}`}
-                  src={mapSrc}
-                  className="absolute inset-0 h-full w-full border-0 grayscale-[20%] contrast-110"
-                  loading="lazy"
-                />
-              </div>
-              <div className="flex items-center justify-between px-5 py-3 text-[10px] uppercase tracking-[0.2em] text-white/55">
-                <span>{place.temple}</span>
-                <a
-                  href={`https://www.openstreetmap.org/?mlat=${place.lat}&mlon=${place.lng}#map=14/${place.lat}/${place.lng}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-white/75 hover:text-white"
-                >
-                  Open ↗
-                </a>
-              </div>
-            </div>
 
             {/* Plan your journey */}
             <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
