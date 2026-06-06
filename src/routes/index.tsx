@@ -108,9 +108,9 @@ const experiences: Experience[] = [
       { label: "Architecture", value: "Nagara Style" },
     ],
     hotels: [
-      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.5 km from Ram Mandir", url: "https://www.theramayanahotel.com/" },
-      { name: "The Clarks International", tag: "Boutique", rating: 4, price: "₹4,500", distance: "Ayodhya Cantt", url: "https://www.theclarkshotels.com/" },
-      { name: "Park Inn by Radisson Ayodhya", tag: "Modern", rating: 4, price: "₹6,800", distance: "2.4 km from Ram Mandir", url: "https://www.radissonhotels.com/en-us/brand/park-inn" },
+      { name: "The Ramayana Hotel Ayodhya", tag: "Premier", rating: 5, price: "₹9,200", distance: "1.5 km from Ram Mandir", url: "https://www.theramayanahotel.com/", image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=900&q=80" },
+      { name: "The Clarks International", tag: "Boutique", rating: 4, price: "₹4,500", distance: "Ayodhya Cantt", url: "https://www.theclarkshotels.com/", image: "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=900&q=80" },
+      { name: "Park Inn by Radisson Ayodhya", tag: "Modern", rating: 4, price: "₹6,800", distance: "2.4 km from Ram Mandir", url: "https://www.radissonhotels.com/en-us/brand/park-inn", image: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?auto=format&fit=crop&w=900&q=80" },
     ],
   },
   {
