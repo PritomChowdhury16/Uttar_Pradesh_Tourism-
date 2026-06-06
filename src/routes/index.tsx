@@ -161,7 +161,7 @@ const experiences: Experience[] = [
 
 // UP-wide bounding box (covers all 5 sacred destinations from Mathura → Varanasi)
 const UP_BBOX = { minLng: 77.0, minLat: 24.9, maxLng: 83.7, maxLat: 28.1 };
-const UP_MAP_SRC = `https://www.openstreetmap.org/export/embed.html?bbox=${UP_BBOX.minLng}%2C${UP_BBOX.minLat}%2C${UP_BBOX.maxLng}%2C${UP_BBOX.maxLat}&layer=mapnik`;
+
 
 
 
