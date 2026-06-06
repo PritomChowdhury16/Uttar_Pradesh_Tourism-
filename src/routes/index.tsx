@@ -612,46 +612,69 @@ function Index() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {/* Hotels grid */}
-          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-2 content-start">
-            {place.hotels.map((h) => (
-              <a
-                key={h.name + h.url}
-                href={h.url}
-                target="_blank"
-                rel="noreferrer"
-                className="group rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-amber-300/40 hover:bg-white/[0.06]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-white/80">
-                    {h.tag}
-                  </span>
-                  <ArrowRight className="h-4 w-4 text-white/40 transition group-hover:translate-x-0.5 group-hover:text-amber-300" />
-                </div>
-                <p className="mt-4 font-serif text-xl font-medium text-white">{h.name}</p>
-                <div className="mt-1.5 flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`h-3 w-3 ${i < h.rating ? "fill-amber-400 text-amber-400" : "text-white/15"}`}
+          {/* Hotels grid with photos + animation */}
+          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2 content-start">
+            <AnimatePresence mode="popLayout">
+              {place.hotels.map((h, i) => (
+                <motion.a
+                  key={place.title + h.name}
+                  href={h.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  layout
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  whileHover={{ y: -6 }}
+                  className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-amber-300/40 hover:shadow-[0_20px_50px_-20px_rgba(251,191,36,0.35)]"
+                >
+                  {/* Photo */}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden">
+                    <motion.img
+                      src={h.image}
+                      alt={h.name}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                     />
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center justify-between border-t border-white/10 pt-3">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Location</p>
-                    <p className="mt-0.5 text-xs text-white/85">{h.distance}</p>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                    <span className="absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md border border-white/15">
+                      {h.tag}
+                    </span>
+                    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+                      <p className="font-serif text-lg font-medium text-white drop-shadow-lg leading-tight">{h.name}</p>
+                      <ArrowRight className="h-4 w-4 shrink-0 text-white/70 transition group-hover:translate-x-0.5 group-hover:text-amber-300" />
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">From</p>
-                    <p className="mt-0.5 font-serif text-base text-white">{h.price}<span className="text-[10px] text-white/55">/nt</span></p>
+                  {/* Meta */}
+                  <div className="p-4">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, k) => (
+                        <Star
+                          key={k}
+                          className={`h-3 w-3 ${k < h.rating ? "fill-amber-400 text-amber-400" : "text-white/15"}`}
+                        />
+                      ))}
+                    </div>
+                    <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
+                      <div>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Location</p>
+                        <p className="mt-0.5 text-xs text-white/85">{h.distance}</p>
+                      </div>
+                      <div className="text-right">
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">From</p>
+                        <p className="mt-0.5 font-serif text-base text-white">{h.price}<span className="text-[10px] text-white/55">/nt</span></p>
+                      </div>
+                    </div>
+                    <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-amber-200/80">
+                      Visit website ↗
+                    </p>
                   </div>
-                </div>
-                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-amber-200/80 truncate">
-                  Visit website ↗
-                </p>
-              </a>
-            ))}
+                </motion.a>
+              ))}
+            </AnimatePresence>
           </div>
 
 
@@ -679,6 +702,7 @@ function Index() {
                 ))}
               </div>
             </div>
+
 
             {/* Map */}
             <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
