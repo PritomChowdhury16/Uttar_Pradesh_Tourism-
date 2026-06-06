@@ -30,6 +30,7 @@ type Hotel = {
   price: string;
   distance: string;
   url: string;
+  image: string;
 };
 
 type Experience = {
