@@ -359,10 +359,6 @@ function Index() {
                   ))}
                 </div>
 
-                <button className="mt-8 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/5 px-7 py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white backdrop-blur-md hover:bg-white/15 transition">
-                  Explore Journeys
-                  <ArrowRight className="h-4 w-4" />
-                </button>
               </motion.div>
             ) : (
               <motion.div
