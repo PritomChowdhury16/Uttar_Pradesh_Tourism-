@@ -240,9 +240,7 @@ function Index() {
     ? { sun: Sun, cloud: Cloud, rain: CloudRain, snow: CloudSnow }[weatherLabel(weather.code).kind]
     : Sun;
 
-  const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${place.lng - 0.04}%2C${
-    place.lat - 0.03
-  }%2C${place.lng + 0.04}%2C${place.lat + 0.03}&layer=mapnik&marker=${place.lat}%2C${place.lng}`;
+
 
   const downloadBrochure = () => {
     const lines = [
