@@ -464,38 +464,92 @@ function Index() {
         </div>
 
         <div className="mt-8 grid gap-6 lg:grid-cols-5">
-          {/* UP overview map with all 5 pins */}
-          <div className="lg:col-span-3 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          {/* Stylized SVG map — pins align perfectly with bbox math */}
+          <div className="lg:col-span-3 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#1a1410] via-[#0f0a08] to-[#0a0a0a]">
             <div className="relative aspect-[4/3] w-full">
-              <iframe
-                title="Map of sacred destinations across Uttar Pradesh"
-                src={UP_MAP_SRC}
-                className="absolute inset-0 h-full w-full border-0 grayscale-[15%]"
-                loading="lazy"
-              />
-              {/* Overlay pins positioned by lat/lng inside the bbox */}
-              <div className="pointer-events-none absolute inset-0">
+              {/* Decorative background: subtle UP outline + Ganga */}
+              <svg
+                viewBox="0 0 100 75"
+                preserveAspectRatio="none"
+                className="absolute inset-0 h-full w-full"
+                aria-hidden="true"
+              >
+                <defs>
+                  <radialGradient id="glow" cx="50%" cy="50%" r="60%">
+                    <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.08" />
+                    <stop offset="100%" stopColor="#fbbf24" stopOpacity="0" />
+                  </radialGradient>
+                </defs>
+                <rect width="100" height="75" fill="url(#glow)" />
+                {/* Stylized UP outline */}
+                <path
+                  d="M5,18 Q15,8 32,10 Q48,6 62,12 Q78,9 92,18 Q95,30 88,42 Q82,58 70,62 Q55,68 38,65 Q22,67 12,58 Q3,46 5,18 Z"
+                  fill="rgba(251,191,36,0.04)"
+                  stroke="rgba(251,191,36,0.35)"
+                  strokeWidth="0.25"
+                  strokeDasharray="0.8 0.6"
+                />
+                {/* Ganga river path (stylized, flows roughly Mathura → Varanasi) */}
+                <path
+                  d="M10,28 Q25,32 38,35 Q52,40 65,46 Q78,52 90,55"
+                  fill="none"
+                  stroke="rgba(125,211,252,0.45)"
+                  strokeWidth="0.5"
+                  strokeLinecap="round"
+                />
+                {/* Connection lines between pins */}
+                {experiences.map((e, i) => {
+                  if (i === experiences.length - 1) return null;
+                  const next = experiences[i + 1];
+                  const x1 = ((e.lng - UP_BBOX.minLng) / (UP_BBOX.maxLng - UP_BBOX.minLng)) * 100;
+                  const y1 = ((UP_BBOX.maxLat - e.lat) / (UP_BBOX.maxLat - UP_BBOX.minLat)) * 75;
+                  const x2 = ((next.lng - UP_BBOX.minLng) / (UP_BBOX.maxLng - UP_BBOX.minLng)) * 100;
+                  const y2 = ((UP_BBOX.maxLat - next.lat) / (UP_BBOX.maxLat - UP_BBOX.minLat)) * 75;
+                  return (
+                    <line
+                      key={`line-${i}`}
+                      x1={x1} y1={y1} x2={x2} y2={y2}
+                      stroke="rgba(251,191,36,0.25)"
+                      strokeWidth="0.2"
+                      strokeDasharray="0.5 0.5"
+                    />
+                  );
+                })}
+              </svg>
+
+              {/* Pins */}
+              <div className="absolute inset-0">
                 {experiences.map((e, i) => {
                   const left = ((e.lng - UP_BBOX.minLng) / (UP_BBOX.maxLng - UP_BBOX.minLng)) * 100;
                   const top = ((UP_BBOX.maxLat - e.lat) / (UP_BBOX.maxLat - UP_BBOX.minLat)) * 100;
                   const active = selected === i;
                   return (
-                    <button
+                    <motion.button
                       key={e.title}
                       onClick={() => setSelected(i)}
                       style={{ left: `${left}%`, top: `${top}%` }}
-                      className="pointer-events-auto absolute -translate-x-1/2 -translate-y-full group"
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * i, type: "spring", stiffness: 260, damping: 20 }}
+                      whileHover={{ scale: 1.08 }}
+                      className="absolute -translate-x-1/2 -translate-y-full group"
                       aria-label={`${e.temple}, ${e.title}`}
                     >
-                      <div className={`flex flex-col items-center ${active ? "scale-110" : ""} transition`}>
-                        <div className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] backdrop-blur-md shadow-lg ${
-                          active ? "bg-amber-300 text-black" : "bg-black/75 text-white border border-white/20"
+                      <div className="flex flex-col items-center">
+                        <div className={`whitespace-nowrap rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] shadow-lg transition ${
+                          active ? "bg-amber-300 text-black ring-2 ring-amber-300/40" : "bg-black/80 text-white border border-white/20 group-hover:bg-black/95"
                         }`}>
                           {e.title}
                         </div>
-                        <MapPin className={`mt-0.5 h-5 w-5 drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] ${active ? "text-amber-300" : "text-white"}`} />
+                        <MapPin className={`mt-0.5 h-6 w-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] transition ${active ? "text-amber-300" : "text-white"}`} />
+                        {active && (
+                          <motion.div
+                            layoutId="map-pulse"
+                            className="absolute -bottom-1 h-3 w-3 rounded-full bg-amber-300/40 blur-md"
+                          />
+                        )}
                       </div>
-                    </button>
+                    </motion.button>
                   );
                 })}
               </div>
@@ -505,6 +559,7 @@ function Index() {
               <span className="text-amber-200/80">Tap a pin to explore</span>
             </div>
           </div>
+
 
           {/* Destination list */}
           <ul className="lg:col-span-2 grid gap-2 content-start">
