@@ -130,9 +130,9 @@ const experiences: Experience[] = [
       { label: "Ritual", value: "Ganga Aarti at Dashashwamedh" },
     ],
     hotels: [
-      { name: "BrijRama Palace", tag: "Premier Heritage", rating: 5, price: "₹18,500", distance: "Darbhanga Ghat", url: "https://www.brijhotels.com/brijrama-palace-varanasi" },
-      { name: "Taj Ganges Varanasi", tag: "Luxury", rating: 5, price: "₹12,400", distance: "Nadesar Palace Grounds", url: "https://www.tajhotels.com/en-in/hotels/taj-ganges-varanasi/" },
-      { name: "Guleria Kothi at the Ghats", tag: "Boutique", rating: 4, price: "₹7,800", distance: "Shivala Ghat", url: "https://www.guleriakothi.com/" },
+      { name: "BrijRama Palace", tag: "Premier Heritage", rating: 5, price: "₹18,500", distance: "Darbhanga Ghat", url: "https://www.brijhotels.com/brijrama-palace-varanasi", image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?auto=format&fit=crop&w=900&q=80" },
+      { name: "Taj Ganges Varanasi", tag: "Luxury", rating: 5, price: "₹12,400", distance: "Nadesar Palace Grounds", url: "https://www.tajhotels.com/en-in/hotels/taj-ganges-varanasi/", image: "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=900&q=80" },
+      { name: "Guleria Kothi at the Ghats", tag: "Boutique", rating: 4, price: "₹7,800", distance: "Shivala Ghat", url: "https://www.guleriakothi.com/", image: "https://images.unsplash.com/photo-1596178065887-1198b6148b2b?auto=format&fit=crop&w=900&q=80" },
     ],
   },
   {
