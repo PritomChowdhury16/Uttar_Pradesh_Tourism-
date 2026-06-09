@@ -1,13 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, CloudSnow, Coins, Download, RefreshCw, Star, MapPin } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, CloudSnow, Coins, Download, RefreshCw, Star, MapPin, Undo2 } from "lucide-react";
 import premMandir from "@/assets/prem-mandir.png";
 import krishnaJanmabhoomi from "@/assets/krishna-janmabhoomi.png";
 import ramMandir from "@/assets/ram-mandir.png";
 import kashiVishwanath from "@/assets/kashi-vishwanath.png";
 import hanumanGarhi from "@/assets/hanuman-garhi.png";
 import { Chatbot } from "@/components/Chatbot";
+import {
+  GodsSection,
+  HotelsSection,
+  CuisineSection,
+  ReviewsSection,
+  CMSection,
+  ContactsSection,
+  TransportSection,
+  CostCalculator,
+  FeedbackSection,
+} from "@/components/ExtraSections";
 
 const WHATSAPP_NUMBER = "912345687";
 
@@ -312,11 +323,14 @@ function Index() {
           <p className="text-base font-semibold tracking-[0.18em] text-white md:text-lg">
             UTTAR PRADESH TOURISM
           </p>
-          <nav className="hidden items-center gap-10 text-xs uppercase tracking-[0.2em] text-white/80 md:flex">
+          <nav className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.2em] text-white/80 md:flex">
             <a href="#" className="relative pb-1 text-white after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-white">Destinations</a>
-            <a href="#stays" className="hover:text-white transition">Stays</a>
-            <a href="#culinary" className="hover:text-white transition">Culinary</a>
-            <a href="#" className="hover:text-white transition">Journal</a>
+            <a href="#hotels" className="hover:text-white transition">Hotels</a>
+            <a href="#cuisine" className="hover:text-white transition">Cuisine</a>
+            <a href="#transport" className="hover:text-white transition">Transport</a>
+            <a href="#reviews" className="hover:text-white transition">Reviews</a>
+            <a href="#contacts" className="hover:text-white transition">Contacts</a>
+            <a href="#feedback" className="hover:text-white transition">Feedback</a>
           </nav>
           <button className="rounded-full bg-white px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white/90 transition">
             Book Now
@@ -389,11 +403,21 @@ function Index() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80">
               Curated Experiences
             </p>
-            <div className="hidden gap-2 md:flex">
-              <button onClick={prev} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
+            <div className="flex gap-2">
+              {selected !== null && (
+                <button
+                  onClick={() => setSelected(null)}
+                  title="Reset to intro background"
+                  className="flex h-9 items-center gap-1.5 rounded-full border border-amber-300/50 bg-amber-300/15 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-200 hover:bg-amber-300/25 transition"
+                >
+                  <Undo2 className="h-3.5 w-3.5" />
+                  Undo
+                </button>
+              )}
+              <button onClick={prev} className="hidden md:flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
+              <button onClick={next} className="hidden md:flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
@@ -747,6 +771,17 @@ function Index() {
           </aside>
         </div>
       </section>
+
+      <GodsSection />
+      <HotelsSection />
+      <CuisineSection />
+      <TransportSection />
+      <CostCalculator />
+      <ReviewsSection />
+      <CMSection />
+      <ContactsSection />
+      <FeedbackSection />
+
 
       <footer className="border-t border-white/10 px-6 py-8 md:px-12">
         <div className="flex flex-col items-center justify-between gap-3 text-[10px] uppercase tracking-[0.3em] text-white/40 md:flex-row">
