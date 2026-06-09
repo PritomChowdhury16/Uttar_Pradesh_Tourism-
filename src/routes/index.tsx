@@ -1,13 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, CloudSnow, Coins, Download, RefreshCw, Star, MapPin } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sun, Cloud, CloudRain, CloudSnow, Coins, Download, RefreshCw, Star, MapPin, Undo2 } from "lucide-react";
 import premMandir from "@/assets/prem-mandir.png";
 import krishnaJanmabhoomi from "@/assets/krishna-janmabhoomi.png";
 import ramMandir from "@/assets/ram-mandir.png";
 import kashiVishwanath from "@/assets/kashi-vishwanath.png";
 import hanumanGarhi from "@/assets/hanuman-garhi.png";
 import { Chatbot } from "@/components/Chatbot";
+import {
+  GodsSection,
+  HotelsSection,
+  CuisineSection,
+  ReviewsSection,
+  CMSection,
+  ContactsSection,
+  TransportSection,
+  CostCalculator,
+  FeedbackSection,
+} from "@/components/ExtraSections";
 
 const WHATSAPP_NUMBER = "912345687";
 
