@@ -323,11 +323,14 @@ function Index() {
           <p className="text-base font-semibold tracking-[0.18em] text-white md:text-lg">
             UTTAR PRADESH TOURISM
           </p>
-          <nav className="hidden items-center gap-10 text-xs uppercase tracking-[0.2em] text-white/80 md:flex">
+          <nav className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.2em] text-white/80 md:flex">
             <a href="#" className="relative pb-1 text-white after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-white">Destinations</a>
-            <a href="#stays" className="hover:text-white transition">Stays</a>
-            <a href="#culinary" className="hover:text-white transition">Culinary</a>
-            <a href="#" className="hover:text-white transition">Journal</a>
+            <a href="#hotels" className="hover:text-white transition">Hotels</a>
+            <a href="#cuisine" className="hover:text-white transition">Cuisine</a>
+            <a href="#transport" className="hover:text-white transition">Transport</a>
+            <a href="#reviews" className="hover:text-white transition">Reviews</a>
+            <a href="#contacts" className="hover:text-white transition">Contacts</a>
+            <a href="#feedback" className="hover:text-white transition">Feedback</a>
           </nav>
           <button className="rounded-full bg-white px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white/90 transition">
             Book Now
