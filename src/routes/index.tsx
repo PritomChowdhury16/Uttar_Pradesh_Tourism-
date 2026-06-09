@@ -772,6 +772,17 @@ function Index() {
         </div>
       </section>
 
+      <GodsSection />
+      <HotelsSection />
+      <CuisineSection />
+      <TransportSection />
+      <CostCalculator />
+      <ReviewsSection />
+      <CMSection />
+      <ContactsSection />
+      <FeedbackSection />
+
+
       <footer className="border-t border-white/10 px-6 py-8 md:px-12">
         <div className="flex flex-col items-center justify-between gap-3 text-[10px] uppercase tracking-[0.3em] text-white/40 md:flex-row">
           <p>© Uttar Pradesh Tourism</p>
