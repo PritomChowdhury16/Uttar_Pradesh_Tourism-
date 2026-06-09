@@ -403,11 +403,21 @@ function Index() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/80">
               Curated Experiences
             </p>
-            <div className="hidden gap-2 md:flex">
-              <button onClick={prev} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
+            <div className="flex gap-2">
+              {selected !== null && (
+                <button
+                  onClick={() => setSelected(null)}
+                  title="Reset to intro background"
+                  className="flex h-9 items-center gap-1.5 rounded-full border border-amber-300/50 bg-amber-300/15 px-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-200 hover:bg-amber-300/25 transition"
+                >
+                  <Undo2 className="h-3.5 w-3.5" />
+                  Undo
+                </button>
+              )}
+              <button onClick={prev} className="hidden md:flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
                 <ChevronLeft className="h-4 w-4" />
               </button>
-              <button onClick={next} className="flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
+              <button onClick={next} className="hidden md:flex h-9 w-9 items-center justify-center rounded-full border border-white/25 bg-white/5 backdrop-blur-md text-white hover:bg-white/15 transition">
                 <ChevronRight className="h-4 w-4" />
               </button>
             </div>
