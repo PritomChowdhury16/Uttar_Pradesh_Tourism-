@@ -11,7 +11,17 @@ import {
   Hotel as HotelIcon,
   Send,
   CheckCircle2,
+  Sparkles,
+  Sun,
+  CloudRain,
+  Route as RouteIcon,
+  Wallet,
 } from "lucide-react";
+import krishnaImg from "@/assets/krishna.png.asset.json";
+import ramImg from "@/assets/ram.png.asset.json";
+import shivImg from "@/assets/shiv.png.asset.json";
+import hanumanImg from "@/assets/hanuman.png.asset.json";
+import cmImg from "@/assets/cm.png.asset.json";
 
 // ---------- Data ----------
 
@@ -58,11 +68,11 @@ export const allHotels: HotelFull[] = [
 export const cuisines = [
   { name: "Banarasi Thali", place: "Varanasi", desc: "12-bowl sattvic feast on a brass plate — kachori, sabzi, dal, malaiyo.", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80" },
   { name: "Banarasi Paan", place: "Varanasi", desc: "Iconic betel leaf with gulkand, saunf and silver varq.", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80" },
-  { name: "Mathura Peda", place: "Mathura", desc: "Caramelised milk sweet — handcrafted for centuries near Janmabhoomi.", image: "https://images.unsplash.com/photo-1605197788044-5e4c9b0e4f3a?auto=format&fit=crop&w=600&q=80" },
+  { name: "Mathura Peda", place: "Mathura", desc: "Caramelised milk sweet — handcrafted for centuries near Janmabhoomi.", image: "https://images.unsplash.com/photo-1610508500445-a4592435e27e?auto=format&fit=crop&w=600&q=80" },
   { name: "Aloo Puri & Jalebi", place: "Mathura", desc: "Crisp puris with spiced potato curry and orange jalebis.", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80" },
   { name: "Vrindavan Lassi", place: "Vrindavan", desc: "Thick, saffron-laced lassi topped with malai and rose petals.", image: "https://images.unsplash.com/photo-1546039907-7fa05f864c02?auto=format&fit=crop&w=600&q=80" },
   { name: "Chappan Bhog", place: "Vrindavan", desc: "Legendary 56-item Krishna prasad — kheer, ladoo, mathri & more.", image: "https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=600&q=80" },
-  { name: "Awadhi Litti Chokha", place: "Ayodhya", desc: "Roasted wheat balls stuffed with sattu, served with smoked chokha.", image: "https://images.unsplash.com/photo-1626500155383-2b06daa2cebb?auto=format&fit=crop&w=600&q=80" },
+  { name: "Awadhi Litti Chokha", place: "Ayodhya", desc: "Roasted wheat balls stuffed with sattu, served with smoked chokha.", image: "https://images.unsplash.com/photo-1630383249896-24074d262ac5?auto=format&fit=crop&w=600&q=80" },
   { name: "Malaiyo / Makhan Malai", place: "Varanasi", desc: "Winter-only saffron foam dessert — only found in Kashi's lanes.", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" },
 ];
 
@@ -106,10 +116,10 @@ export const transports = [
 ];
 
 export const gods = [
-  { name: "Lord Krishna", place: "Vrindavan & Mathura", image: "https://images.unsplash.com/photo-1604608672516-f1b9b1d1ab17?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Ram", place: "Ayodhya", image: "https://images.unsplash.com/photo-1705317449347-b6b04ed9ce21?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Shiv (Kashi Vishwanath)", place: "Varanasi", image: "https://images.unsplash.com/photo-1582450871972-ab5ca641643d?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Hanuman", place: "Hanuman Garhi, Ayodhya", image: "https://images.unsplash.com/photo-1609766418204-94aae0ecfdfc?auto=format&fit=crop&w=700&q=80" },
+  { name: "Lord Krishna", place: "Vrindavan & Mathura", image: krishnaImg.url },
+  { name: "Lord Ram", place: "Ayodhya", image: ramImg.url },
+  { name: "Lord Shiv (Kashi Vishwanath)", place: "Varanasi", image: shivImg.url },
+  { name: "Lord Hanuman", place: "Hanuman Garhi, Ayodhya", image: hanumanImg.url },
 ];
 
 // ---------- Components ----------
@@ -319,7 +329,7 @@ export function CMSection() {
           className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-amber-300/30"
         >
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/The_Chief_Minister_of_Uttar_Pradesh%2C_Shri_Yogi_Adityanath_calling_on_the_Union_Minister_for_Road_Transport_%26_Highways%2C_Shipping_and_Water_Resources%2C_River_Development_%26_Ganga_Rejuvenation%2C_Shri_Nitin_Gadkari%2C_in_New_Delhi.JPG/640px-thumbnail.jpg"
+            src={cmImg.url}
             alt="Yogi Adityanath — Chief Minister of Uttar Pradesh"
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
@@ -610,3 +620,202 @@ export function FeedbackSection() {
 }
 
 export { HotelIcon };
+
+// ============================================================
+// AI Trip Planner
+// ============================================================
+
+type City = "Vrindavan" | "Mathura" | "Ayodhya" | "Varanasi" | "Hanuman Garhi";
+
+const CITY_ORDER: Record<City, number> = {
+  Mathura: 0,
+  Vrindavan: 1,
+  Ayodhya: 2,
+  "Hanuman Garhi": 3,
+  Varanasi: 4,
+};
+
+const CITY_INFO: Record<
+  City,
+  { weather: "Sunny" | "Pleasant" | "Rainy" | "Hot"; minBudget: number; hotel: number; food: number; mustSee: string[] }
+> = {
+  Vrindavan: { weather: "Pleasant", minBudget: 3500, hotel: 2200, food: 500, mustSee: ["Prem Mandir", "Banke Bihari", "ISKCON"] },
+  Mathura: { weather: "Hot", minBudget: 3000, hotel: 1900, food: 450, mustSee: ["Krishna Janmabhoomi", "Dwarkadhish", "Vishram Ghat"] },
+  Ayodhya: { weather: "Pleasant", minBudget: 4000, hotel: 2400, food: 500, mustSee: ["Ram Mandir", "Hanuman Garhi", "Saryu Aarti"] },
+  Varanasi: { weather: "Rainy", minBudget: 4500, hotel: 2800, food: 600, mustSee: ["Kashi Vishwanath", "Dashashwamedh Ghat", "Sarnath"] },
+  "Hanuman Garhi": { weather: "Pleasant", minBudget: 2500, hotel: 1800, food: 400, mustSee: ["Hanuman Garhi Temple", "Kanak Bhawan"] },
+};
+
+export function AITripPlannerSection() {
+  const [budget, setBudget] = useState(15000);
+  const [days, setDays] = useState(4);
+  const [members, setMembers] = useState(2);
+  const [weatherPref, setWeatherPref] = useState<"Any" | "Pleasant" | "Sunny" | "Rainy" | "Hot">("Pleasant");
+  const [generated, setGenerated] = useState(false);
+
+  const result = useMemo(() => {
+    const perDay = budget / Math.max(days, 1);
+    // Budget-based: which cities fit
+    const affordable = (Object.keys(CITY_INFO) as City[]).filter(
+      (c) => (CITY_INFO[c].hotel + CITY_INFO[c].food) * members <= perDay * 1.2,
+    );
+    // Weather-based filter
+    const weatherMatched =
+      weatherPref === "Any" ? affordable : affordable.filter((c) => CITY_INFO[c].weather === weatherPref);
+    const finalList = (weatherMatched.length ? weatherMatched : affordable).sort(
+      (a, b) => CITY_ORDER[a] - CITY_ORDER[b],
+    );
+
+    // Route optimization: sort west→east (Mathura→Vrindavan→Ayodhya→HanumanGarhi→Varanasi)
+    const route = finalList.slice(0, Math.min(days, finalList.length));
+
+    // Itinerary
+    const itinerary = Array.from({ length: days }).map((_, i) => {
+      const city = route[i % route.length];
+      const info = CITY_INFO[city];
+      return {
+        day: i + 1,
+        city,
+        morning: `Sunrise at ${info.mustSee[0]}`,
+        afternoon: `Lunch + visit ${info.mustSee[1] ?? info.mustSee[0]}`,
+        evening: info.mustSee[2] ? `Evening aarti — ${info.mustSee[2]}` : `Local market walk`,
+      };
+    });
+
+    const totalCost = route.reduce(
+      (acc, c) => acc + (CITY_INFO[c].hotel + CITY_INFO[c].food) * members,
+      0,
+    ) * Math.ceil(days / Math.max(route.length, 1));
+
+    return { route, itinerary, totalCost, perDay };
+  }, [budget, days, members, weatherPref]);
+
+  return (
+    <section id="ai-planner" className="px-6 py-16 md:px-12 md:py-20 border-t border-white/5">
+      <div className="flex items-center gap-3">
+        <Sparkles className="h-5 w-5 text-amber-300" />
+        <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/80">AI Trip Planner</p>
+      </div>
+      <h2 className="mt-2 font-serif text-3xl md:text-5xl font-medium text-white">Plan a Sacred Journey, Intelligently</h2>
+      <p className="mt-3 max-w-2xl text-sm text-white/65">
+        Budget-based recommendations, weather-aware suggestions, a personalised itinerary, and an optimised pilgrimage route — all in one click.
+      </p>
+
+      <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_1.3fr]">
+        {/* Inputs */}
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 space-y-6">
+          <div>
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/65">
+                <Wallet className="h-3.5 w-3.5 text-amber-300" /> Total Budget
+              </label>
+              <span className="font-serif text-sm text-white">₹{budget.toLocaleString("en-IN")}</span>
+            </div>
+            <input type="range" min={5000} max={150000} step={1000} value={budget} onChange={(e) => setBudget(+e.target.value)} className="mt-2 w-full accent-amber-300" />
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label className="text-[11px] uppercase tracking-[0.22em] text-white/65">Days</label>
+              <span className="font-serif text-sm text-white">{days}</span>
+            </div>
+            <input type="range" min={1} max={10} step={1} value={days} onChange={(e) => setDays(+e.target.value)} className="mt-2 w-full accent-amber-300" />
+          </div>
+          <div>
+            <div className="flex items-center justify-between">
+              <label className="text-[11px] uppercase tracking-[0.22em] text-white/65">Members</label>
+              <span className="font-serif text-sm text-white">{members}</span>
+            </div>
+            <input type="range" min={1} max={10} step={1} value={members} onChange={(e) => setMembers(+e.target.value)} className="mt-2 w-full accent-amber-300" />
+          </div>
+          <div>
+            <label className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-white/65">
+              <Sun className="h-3.5 w-3.5 text-amber-300" /> Preferred Weather
+            </label>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(["Any", "Pleasant", "Sunny", "Rainy", "Hot"] as const).map((w) => (
+                <button
+                  key={w}
+                  onClick={() => setWeatherPref(w)}
+                  className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-[10px] uppercase tracking-[0.18em] border transition ${
+                    weatherPref === w ? "bg-amber-300 text-black border-amber-300" : "border-white/15 text-white/70 hover:bg-white/5"
+                  }`}
+                >
+                  {w === "Rainy" ? <CloudRain className="h-3 w-3" /> : <Sun className="h-3 w-3" />}
+                  {w}
+                </button>
+              ))}
+            </div>
+          </div>
+          <button
+            onClick={() => setGenerated(true)}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-amber-300 px-5 py-3 text-xs font-bold uppercase tracking-[0.25em] text-black hover:bg-amber-200 transition"
+          >
+            <Sparkles className="h-4 w-4" /> Generate My Trip
+          </button>
+        </div>
+
+        {/* Output */}
+        <motion.div layout className="rounded-2xl border border-amber-300/30 bg-gradient-to-br from-amber-300/[0.06] to-transparent p-6 space-y-5">
+          <AnimatePresence mode="wait">
+            {!generated ? (
+              <motion.div key="empty" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="h-full min-h-[280px] flex flex-col items-center justify-center text-center text-white/60">
+                <Sparkles className="h-10 w-10 text-amber-300/60" />
+                <p className="mt-3 text-sm">Set your preferences and tap <span className="text-amber-200">Generate My Trip</span></p>
+              </motion.div>
+            ) : (
+              <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-5">
+                <div className="flex items-center justify-between flex-wrap gap-3">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.25em] text-amber-200/85">Estimated Cost</p>
+                    <p className="font-serif text-3xl text-white">₹{result.totalCost.toLocaleString("en-IN")}</p>
+                    <p className="text-[11px] text-white/55">for {members} · {days} days · ₹{Math.round(result.perDay).toLocaleString("en-IN")}/day budget</p>
+                  </div>
+                  <span className={`rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.2em] border ${
+                    result.totalCost <= budget ? "bg-emerald-400/15 text-emerald-200 border-emerald-300/30" : "bg-rose-400/15 text-rose-200 border-rose-300/30"
+                  }`}>
+                    {result.totalCost <= budget ? "Within Budget" : "Over Budget"}
+                  </span>
+                </div>
+
+                {/* Route Optimization */}
+                <div>
+                  <p className="flex items-center gap-2 text-[11px] uppercase tracking-[0.22em] text-amber-200/85">
+                    <RouteIcon className="h-3.5 w-3.5" /> Optimised Route
+                  </p>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    {result.route.map((c, i) => (
+                      <div key={c} className="flex items-center gap-2">
+                        <span className="rounded-full border border-amber-300/40 bg-amber-300/10 px-3 py-1 text-xs text-white">{c}</span>
+                        {i < result.route.length - 1 && <span className="text-amber-200/50">→</span>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Itinerary */}
+                <div>
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-amber-200/85">Personalised Itinerary</p>
+                  <div className="mt-3 space-y-2 max-h-[260px] overflow-y-auto pr-1">
+                    {result.itinerary.map((d) => (
+                      <div key={d.day} className="rounded-xl border border-white/10 bg-black/30 p-3">
+                        <div className="flex items-center justify-between">
+                          <p className="font-serif text-sm text-white">Day {d.day} · {d.city}</p>
+                          <span className="text-[10px] uppercase tracking-[0.2em] text-amber-200/70">{CITY_INFO[d.city].weather}</span>
+                        </div>
+                        <ul className="mt-1.5 space-y-0.5 text-[11px] text-white/70">
+                          <li>🌅 {d.morning}</li>
+                          <li>🍛 {d.afternoon}</li>
+                          <li>🪔 {d.evening}</li>
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      </div>
+    </section>
+  );
+}

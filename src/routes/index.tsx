@@ -18,6 +18,7 @@ import {
   TransportSection,
   CostCalculator,
   FeedbackSection,
+  AITripPlannerSection,
 } from "@/components/ExtraSections";
 
 const WHATSAPP_NUMBER = "912345687";
@@ -325,6 +326,7 @@ function Index() {
           </p>
           <nav className="hidden items-center gap-7 text-[11px] uppercase tracking-[0.2em] text-white/80 md:flex">
             <a href="#" className="relative pb-1 text-white after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:bg-white">Destinations</a>
+            <a href="#ai-planner" className="hover:text-white transition">AI Planner</a>
             <a href="#hotels" className="hover:text-white transition">Hotels</a>
             <a href="#cuisine" className="hover:text-white transition">Cuisine</a>
             <a href="#transport" className="hover:text-white transition">Transport</a>
@@ -772,6 +774,7 @@ function Index() {
         </div>
       </section>
 
+      <AITripPlannerSection />
       <GodsSection />
       <HotelsSection />
       <CuisineSection />
