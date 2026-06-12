@@ -11,7 +11,17 @@ import {
   Hotel as HotelIcon,
   Send,
   CheckCircle2,
+  Sparkles,
+  Sun,
+  CloudRain,
+  Route as RouteIcon,
+  Wallet,
 } from "lucide-react";
+import krishnaImg from "@/assets/krishna.png.asset.json";
+import ramImg from "@/assets/ram.png.asset.json";
+import shivImg from "@/assets/shiv.png.asset.json";
+import hanumanImg from "@/assets/hanuman.png.asset.json";
+import cmImg from "@/assets/cm.png.asset.json";
 
 // ---------- Data ----------
 
@@ -58,11 +68,11 @@ export const allHotels: HotelFull[] = [
 export const cuisines = [
   { name: "Banarasi Thali", place: "Varanasi", desc: "12-bowl sattvic feast on a brass plate — kachori, sabzi, dal, malaiyo.", image: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=600&q=80" },
   { name: "Banarasi Paan", place: "Varanasi", desc: "Iconic betel leaf with gulkand, saunf and silver varq.", image: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=600&q=80" },
-  { name: "Mathura Peda", place: "Mathura", desc: "Caramelised milk sweet — handcrafted for centuries near Janmabhoomi.", image: "https://images.unsplash.com/photo-1605197788044-5e4c9b0e4f3a?auto=format&fit=crop&w=600&q=80" },
+  { name: "Mathura Peda", place: "Mathura", desc: "Caramelised milk sweet — handcrafted for centuries near Janmabhoomi.", image: "https://images.unsplash.com/photo-1610508500445-a4592435e27e?auto=format&fit=crop&w=600&q=80" },
   { name: "Aloo Puri & Jalebi", place: "Mathura", desc: "Crisp puris with spiced potato curry and orange jalebis.", image: "https://images.unsplash.com/photo-1606491956689-2ea866880c84?auto=format&fit=crop&w=600&q=80" },
   { name: "Vrindavan Lassi", place: "Vrindavan", desc: "Thick, saffron-laced lassi topped with malai and rose petals.", image: "https://images.unsplash.com/photo-1546039907-7fa05f864c02?auto=format&fit=crop&w=600&q=80" },
   { name: "Chappan Bhog", place: "Vrindavan", desc: "Legendary 56-item Krishna prasad — kheer, ladoo, mathri & more.", image: "https://images.unsplash.com/photo-1567337710282-00832b415979?auto=format&fit=crop&w=600&q=80" },
-  { name: "Awadhi Litti Chokha", place: "Ayodhya", desc: "Roasted wheat balls stuffed with sattu, served with smoked chokha.", image: "https://images.unsplash.com/photo-1626500155383-2b06daa2cebb?auto=format&fit=crop&w=600&q=80" },
+  { name: "Awadhi Litti Chokha", place: "Ayodhya", desc: "Roasted wheat balls stuffed with sattu, served with smoked chokha.", image: "https://images.unsplash.com/photo-1630383249896-24074d262ac5?auto=format&fit=crop&w=600&q=80" },
   { name: "Malaiyo / Makhan Malai", place: "Varanasi", desc: "Winter-only saffron foam dessert — only found in Kashi's lanes.", image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=600&q=80" },
 ];
 
@@ -106,10 +116,10 @@ export const transports = [
 ];
 
 export const gods = [
-  { name: "Lord Krishna", place: "Vrindavan & Mathura", image: "https://images.unsplash.com/photo-1604608672516-f1b9b1d1ab17?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Ram", place: "Ayodhya", image: "https://images.unsplash.com/photo-1705317449347-b6b04ed9ce21?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Shiv (Kashi Vishwanath)", place: "Varanasi", image: "https://images.unsplash.com/photo-1582450871972-ab5ca641643d?auto=format&fit=crop&w=700&q=80" },
-  { name: "Lord Hanuman", place: "Hanuman Garhi, Ayodhya", image: "https://images.unsplash.com/photo-1609766418204-94aae0ecfdfc?auto=format&fit=crop&w=700&q=80" },
+  { name: "Lord Krishna", place: "Vrindavan & Mathura", image: krishnaImg.url },
+  { name: "Lord Ram", place: "Ayodhya", image: ramImg.url },
+  { name: "Lord Shiv (Kashi Vishwanath)", place: "Varanasi", image: shivImg.url },
+  { name: "Lord Hanuman", place: "Hanuman Garhi, Ayodhya", image: hanumanImg.url },
 ];
 
 // ---------- Components ----------
@@ -319,7 +329,7 @@ export function CMSection() {
           className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-amber-300/30"
         >
           <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/The_Chief_Minister_of_Uttar_Pradesh%2C_Shri_Yogi_Adityanath_calling_on_the_Union_Minister_for_Road_Transport_%26_Highways%2C_Shipping_and_Water_Resources%2C_River_Development_%26_Ganga_Rejuvenation%2C_Shri_Nitin_Gadkari%2C_in_New_Delhi.JPG/640px-thumbnail.jpg"
+            src={cmImg.url}
             alt="Yogi Adityanath — Chief Minister of Uttar Pradesh"
             loading="lazy"
             className="absolute inset-0 h-full w-full object-cover"
