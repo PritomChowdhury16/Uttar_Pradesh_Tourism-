@@ -334,9 +334,14 @@ function Index() {
             <a href="#contacts" className="hover:text-white transition">Contacts</a>
             <a href="#feedback" className="hover:text-white transition">Feedback</a>
           </nav>
-          <button className="rounded-full bg-white px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white/90 transition">
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdUwrH8RrUbjWXFC1PZ1Wjtri3sNonroyVH49gXCnIEpzrR4g/viewform?usp=publish-editor"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full bg-white px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.2em] text-black hover:bg-white/90 transition"
+          >
             Book Now
-          </button>
+          </a>
         </header>
 
         {/* Hero copy */}
@@ -615,171 +620,13 @@ function Index() {
         </div>
       </section>
 
-      {/* HOTELS FOR SELECTED DESTINATION */}
-      <section id="stays" className="relative px-6 py-16 md:px-12 md:py-20 border-t border-white/5">
-        <div className="flex items-end justify-between flex-wrap gap-4">
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-amber-200/80">
-              Where to Stay
-            </p>
-            <h2 className="mt-2 font-serif text-3xl md:text-5xl font-medium text-white">
-              Hotels near {place.temple}
-            </h2>
-            <p className="mt-2 text-sm text-white/65">
-              Hand-picked stays in {place.title} — book directly with the hotel.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-8 grid gap-6 lg:grid-cols-3">
-          {/* Hotels grid with photos + animation */}
-          <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2 content-start">
-            <AnimatePresence mode="popLayout">
-              {place.hotels.map((h, i) => (
-                <motion.a
-                  key={place.title + h.name}
-                  href={h.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  layout
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -12 }}
-                  transition={{ delay: i * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                  whileHover={{ y: -6 }}
-                  className="group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-amber-300/40 hover:shadow-[0_20px_50px_-20px_rgba(251,191,36,0.35)]"
-                >
-                  {/* Photo */}
-                  <div className="relative aspect-[16/10] w-full overflow-hidden">
-                    <motion.img
-                      src={h.image}
-                      alt={h.name}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover"
-                      whileHover={{ scale: 1.08 }}
-                      transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                    <span className="absolute top-3 left-3 rounded-full bg-black/60 px-3 py-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md border border-white/15">
-                      {h.tag}
-                    </span>
-                    <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-                      <p className="font-serif text-lg font-medium text-white drop-shadow-lg leading-tight">{h.name}</p>
-                      <ArrowRight className="h-4 w-4 shrink-0 text-white/70 transition group-hover:translate-x-0.5 group-hover:text-amber-300" />
-                    </div>
-                  </div>
-                  {/* Meta */}
-                  <div className="p-4">
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: 5 }).map((_, k) => (
-                        <Star
-                          key={k}
-                          className={`h-3 w-3 ${k < h.rating ? "fill-amber-400 text-amber-400" : "text-white/15"}`}
-                        />
-                      ))}
-                    </div>
-                    <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-3">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Location</p>
-                        <p className="mt-0.5 text-xs text-white/85">{h.distance}</p>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">From</p>
-                        <p className="mt-0.5 font-serif text-base text-white">{h.price}<span className="text-[10px] text-white/55">/nt</span></p>
-                      </div>
-                    </div>
-                    <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-amber-200/80">
-                      Visit website ↗
-                    </p>
-                  </div>
-                </motion.a>
-              ))}
-            </AnimatePresence>
-          </div>
-
-
-          {/* Sidebar */}
-          <aside className="space-y-6">
-            {/* Culinary */}
-            <div id="culinary" className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
-                Local Culinary Delights
-              </p>
-              <div className="mt-5 space-y-5">
-                {culinary.map((c) => (
-                  <div key={c.name} className="flex gap-4">
-                    <img
-                      src={c.image}
-                      alt={c.name}
-                      className="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-white/15"
-                    />
-                    <div>
-                      <p className="font-serif text-base font-medium text-white">{c.name}</p>
-                      <p className="mt-1 text-xs leading-relaxed text-white/65">{c.description}</p>
-                      <p className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.2em] text-amber-200/80">{c.place}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-
-
-            {/* Plan your journey */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-5">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white/80">
-                Plan Your Journey
-              </p>
-              <div className="mt-4 space-y-3">
-                <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                  <div className="flex items-center gap-3">
-                    <WeatherIcon className="h-5 w-5 text-amber-300" />
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">
-                        Live Weather · {place.title}
-                      </p>
-                      <p className="text-sm text-white">
-                        {weatherLoading
-                          ? "Loading…"
-                          : weather
-                            ? `${weather.temp}°C · ${weather.label}`
-                            : "Unavailable"}
-                      </p>
-                    </div>
-                  </div>
-                  <p className="text-[10px] text-white/60">
-                    {new Date().toLocaleDateString("en-IN", { weekday: "short", day: "numeric", month: "short" })}
-                  </p>
-                </div>
-                <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                  <div className="flex items-center gap-3">
-                    <Coins className="h-5 w-5 text-amber-300" />
-                    <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Currency Converter</p>
-                      <p className="text-sm text-white">1 USD = 83.4 INR</p>
-                    </div>
-                  </div>
-                  <RefreshCw className="h-4 w-4 text-white/40" />
-                </div>
-                <button
-                  onClick={downloadBrochure}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/[0.06] py-3.5 text-xs font-semibold uppercase tracking-[0.25em] text-white hover:bg-white/10 transition"
-                >
-                  <Download className="h-4 w-4" />
-                  Download Brochure
-                </button>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </section>
 
       <AITripPlannerSection />
       <GodsSection />
       <HotelsSection />
       <CuisineSection />
       <TransportSection />
-      <CostCalculator />
+      
       <ReviewsSection />
       <CMSection />
       <ContactsSection />
